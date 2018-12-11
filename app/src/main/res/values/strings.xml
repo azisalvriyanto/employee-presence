@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">UIN Sunan Kalijaga</string>
+    <!-- Strings related to login -->
+    <string name="prompt_nip">Nomer Induk Pegawai</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_masuk">Masuk</string>
+    <string name="error_invalid_nip">NIP ini tidak valid</string>
+    <string name="error_invalid_password">Kata sandi terlalu pendek</string>
+    <string name="error_incorrect_password">Kata sandi ini salah</string>
+    <string name="error_field_required">Bagian ini diperlukan</string>
+    <string name="permission_rationale">"Izin kontak diperlukan untuk menyediakan penyelesaian NIP."</string>
+
+    <string name="title_menu">Menu</string>
+    <string name="title_menu_absensi">Absensi</string>
+    <string name="title_menu_riwayat">Riwayat</string>
+    <string name="title_menu_izin">Izin</string>
+    <string name="title_activity_a_menu">UIN Sunan Kalijaga</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
