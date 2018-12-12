@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class a_menu_fabsensi extends Fragment {
-    public a_menu_fabsensi() {
+public class A_menu_fabsensi extends Fragment {
+    public A_menu_fabsensi() {
         // Required empty public constructor
         //return Fragment();
     }

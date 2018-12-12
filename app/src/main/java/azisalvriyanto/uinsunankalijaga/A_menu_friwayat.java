@@ -8,8 +8,8 @@ import android.content.Context;
         import android.view.View;
         import android.view.ViewGroup;
 
-public class a_menu_friwayat extends Fragment {
-    public a_menu_friwayat() {
+public class A_menu_friwayat extends Fragment {
+    public A_menu_friwayat() {
         // Required empty public constructor
         //return Fragment();
     }

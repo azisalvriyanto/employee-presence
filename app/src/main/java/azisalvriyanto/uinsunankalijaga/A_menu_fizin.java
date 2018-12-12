@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class a_menu_fizin extends Fragment {
-    public a_menu_fizin() {
+public class A_menu_fizin extends Fragment {
+    public A_menu_fizin() {
         // Required empty public constructor
         //return Fragment();
     }

@@ -19,7 +19,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,7 +37,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via username/password.
  */
-public class a_masuk extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class A_masuk extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -85,7 +84,7 @@ public class a_masuk extends AppCompatActivity implements LoaderCallbacks<Cursor
 
         Button mMasuk = findViewById(R.id.l_b_masuk);
         mMasuk.setOnClickListener(new OnClickListener() {
-            Intent a_menu = new Intent(a_masuk.this, a_menu.class);
+            Intent a_menu = new Intent(A_masuk.this, A_menu.class);
             public void onClick(View view) {
                 attemptLogin();
                 startActivity(a_menu);
@@ -280,7 +279,7 @@ public class a_masuk extends AppCompatActivity implements LoaderCallbacks<Cursor
     private void addUsernamesToAutoComplete(List<String> nipAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(a_masuk.this,
+                new ArrayAdapter<>(A_masuk.this,
                         android.R.layout.simple_dropdown_item_1line, nipAddressCollection);
 
         mUsernameView.setAdapter(adapter);

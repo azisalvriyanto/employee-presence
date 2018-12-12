@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".a_menu">
+    tools:context=".A_menu">
 
     <FrameLayout
         android:id="@+id/l_menu_flayout"

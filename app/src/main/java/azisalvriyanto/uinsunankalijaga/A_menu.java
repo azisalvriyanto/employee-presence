@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class a_menu extends AppCompatActivity {
+public class A_menu extends AppCompatActivity {
 
     private TextView mTextMessage;
 
@@ -20,7 +20,7 @@ public class a_menu extends AppCompatActivity {
         setContentView(R.layout.l_menu);
 
         setTitle("Absensi");
-        initFragment(new a_menu_fabsensi());
+        initFragment(new A_menu_fabsensi());
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -35,19 +35,19 @@ public class a_menu extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.l_b_absensi:
                     setTitle("Absensi");
-                    initFragment(new a_menu_fabsensi());
+                    initFragment(new A_menu_fabsensi());
                     return true;
                 case R.id.l_b_riwayat:
                     setTitle("Riwayat");
-                    initFragment(new a_menu_friwayat());
+                    initFragment(new A_menu_friwayat());
                     return true;
                 case R.id.l_b_izin:
                     setTitle("Izin");
-                    initFragment(new a_menu_fizin());
+                    initFragment(new A_menu_fizin());
                     return true;
                 default:
                     setTitle("Absensi");
-                    initFragment(new a_menu_fabsensi());
+                    initFragment(new A_menu_fabsensi());
                     return true;
             }
         }
