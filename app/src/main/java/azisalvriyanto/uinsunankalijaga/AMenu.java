@@ -7,8 +7,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -16,13 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import azisalvriyanto.uinsunankalijaga.Adapter.AdapterRiwayat;
-import azisalvriyanto.uinsunankalijaga.Api.ApiClient;
-import azisalvriyanto.uinsunankalijaga.Api.ApiService;
 import azisalvriyanto.uinsunankalijaga.Model.ModelRiwayat;
-import azisalvriyanto.uinsunankalijaga.Model.ModelRiwayatList;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class AMenu extends AppCompatActivity {
 
@@ -60,9 +52,9 @@ public class AMenu extends AppCompatActivity {
                     setTitle("Riwayat");
                     initFragment(new AMenuFRiwayat());
                     return true;
-                case R.id.l_b_izin:
-                    setTitle("Izin");
-                    initFragment(new AMenuFIzin());
+                case R.id.l_b_akun:
+                    setTitle("Akun");
+                    initFragment(new AMenuFAkun());
                     return true;
                 default:
                     setTitle("Absensi");

@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -37,6 +38,8 @@ public class AMenuFRiwayat extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.l_menu_friwayat, container, false);
+        //TextView data = (TextView) fragmentView.findViewById(R.id.text_izin);
+        //data.setText("asw");
 
         //DARI SINI
         progressDialog = new ProgressDialog(getActivity());
@@ -59,7 +62,7 @@ public class AMenuFRiwayat extends Fragment {
                     riwayatList = response.body().getRiwayat();
                     recyclerView = (RecyclerView) recyclerView.findViewById(R.id.friwayat_layout);
                     adapterRiwayat = new AdapterRiwayat(riwayatList);
-                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(getActivity().getBaseContext());
+                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
                     recyclerView.setLayoutManager(eLayoutManager);
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
                     recyclerView.setAdapter(adapterRiwayat);
