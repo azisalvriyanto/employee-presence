@@ -1,18 +1,37 @@
 package azisalvriyanto.uinsunankalijaga;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class A_menu extends AppCompatActivity {
+import java.util.ArrayList;
+
+import azisalvriyanto.uinsunankalijaga.Adapter.AdapterRiwayat;
+import azisalvriyanto.uinsunankalijaga.Api.ApiClient;
+import azisalvriyanto.uinsunankalijaga.Api.ApiService;
+import azisalvriyanto.uinsunankalijaga.Model.ModelRiwayat;
+import azisalvriyanto.uinsunankalijaga.Model.ModelRiwayatList;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class AMenu extends AppCompatActivity {
 
     private TextView mTextMessage;
-
+    //tambahan
+    private ArrayList<ModelRiwayat> riwayatList;
+    private ProgressDialog progressDialog;
+    private RecyclerView recyclerView;
+    private AdapterRiwayat adapterRiwayat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +39,7 @@ public class A_menu extends AppCompatActivity {
         setContentView(R.layout.l_menu);
 
         setTitle("Absensi");
-        initFragment(new A_menu_fabsensi());
+        initFragment(new AMenuFAbsensi());
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -35,19 +54,19 @@ public class A_menu extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.l_b_absensi:
                     setTitle("Absensi");
-                    initFragment(new A_menu_fabsensi());
+                    initFragment(new AMenuFAbsensi());
                     return true;
                 case R.id.l_b_riwayat:
                     setTitle("Riwayat");
-                    initFragment(new A_menu_friwayat());
+                    initFragment(new AMenuFRiwayat());
                     return true;
                 case R.id.l_b_izin:
                     setTitle("Izin");
-                    initFragment(new A_menu_fizin());
+                    initFragment(new AMenuFIzin());
                     return true;
                 default:
                     setTitle("Absensi");
-                    initFragment(new A_menu_fabsensi());
+                    initFragment(new AMenuFAbsensi());
                     return true;
             }
         }

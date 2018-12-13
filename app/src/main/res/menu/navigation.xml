@@ -4,16 +4,16 @@
     <item
         android:id="@+id/l_b_absensi"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
+        android:title="@string/title_menu_absensi" />
 
     <item
         android:id="@+id/l_b_riwayat"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:title="@string/title_menu_riwayat" />
 
     <item
         android:id="@+id/l_b_izin"
         android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_notifications" />
+        android:title="@string/title_menu_izin" />
 
 </menu>

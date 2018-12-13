@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class A_menu_fizin extends Fragment {
-    public A_menu_fizin() {
+public class AMenuFAbsensi extends Fragment {
+    public AMenuFAbsensi() {
         // Required empty public constructor
         //return Fragment();
     }
@@ -24,6 +24,6 @@ public class A_menu_fizin extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.l_menu_fizin, null);
+        return inflater.inflate(R.layout.l_menu_fabsensi, null);
     }
 }
