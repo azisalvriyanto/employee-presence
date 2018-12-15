@@ -52,9 +52,9 @@ public class AMenu extends AppCompatActivity {
                     setTitle("Riwayat");
                     initFragment(new AMenuFRiwayat());
                     return true;
-                case R.id.l_b_akun:
+                case R.id.l_b_pengguna:
                     setTitle("Absensi");
-                    initFragment(new AMenuFAkun());
+                    initFragment(new AMenuFPengguna());
                     return true;
                 default:
                     setTitle("Absensi");

@@ -118,10 +118,6 @@ public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor>
         mProgressView = findViewById(R.id.masuk_progress);
     }
 
-
-
-
-
     private void masuk_coba(String username, String password) {
         Retrofit apiClient = ApiClient.getClient();
         ApiService apiService = apiClient.create(ApiService.class);
@@ -132,13 +128,13 @@ public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor>
                 if (response.isSuccessful()) {
                     try {
                         if (response.body().getStatus().equals("sukses")) {
-                            //ModelMasuk data = response.body();
-                            //String data_nip = data.getData().getNIP();
-                            //Toast.makeText(getApplicationContext(), data_nip, Toast.LENGTH_SHORT).show();
+                            ModelMasuk data = response.body();
+                            String data_nip = data.getData().getNIP();
+                            Toast.makeText(getApplicationContext(), data_nip, Toast.LENGTH_SHORT).show();
 
                             //Set Logged In statue to 'true'
-                            SaveSharedPreference.setLoggedIn(getApplication().getApplicationContext(), true, "asw");
-                            Intent intent = new Intent(getBaseContext(), AMenu.class);
+                            SaveSharedPreference.setLoggedIn(getApplication().getApplicationContext(), true, data_nip);
+                            Intent intent = new Intent(getApplication().getApplicationContext(), AMenu.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                         } else {
@@ -159,10 +155,6 @@ public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor>
             }
         });
     }
-
-
-
-
 
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {

@@ -12,7 +12,7 @@
         android:title="@string/title_menu_riwayat" />
 
     <item
-        android:id="@+id/l_b_akun"
+        android:id="@+id/l_b_pengguna"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/title_menu_absensi" />
 

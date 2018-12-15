@@ -3,13 +3,13 @@ package azisalvriyanto.uinsunankalijaga.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ModelMasuk {
+public class ModelPengguna {
     @SerializedName("status")
     @Expose
     private String status;
     @SerializedName("hasil")
     @Expose
-    private ModelMasukData data;
+    private ModelPenggunaData data;
 
     public String getStatus() {
         return status;
@@ -19,11 +19,11 @@ public class ModelMasuk {
         this.status = status;
     }
 
-    public ModelMasukData getData() {
+    public ModelPenggunaData getData() {
         return data;
     }
 
-    public void setData(ModelMasukData data) {
+    public void setData(ModelPenggunaData data) {
         this.data = data;
     }
 }
