@@ -16,6 +16,8 @@
     <string name="title_menu_akun">Akun</string>
     <string name="title_activity_a_menu">UIN Sunan Kalijaga</string>
 
+    <string name="action_keluar">Keluar</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

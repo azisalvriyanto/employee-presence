@@ -70,9 +70,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/button"
                 android:text="@string/action_masuk"
                 android:textStyle="bold"
+                android:background="@drawable/button"
                 android:textColor="#FFFFFF" />
 
         </LinearLayout>

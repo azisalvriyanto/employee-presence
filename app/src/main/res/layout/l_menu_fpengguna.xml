@@ -35,10 +35,14 @@
 
         <Button
             android:id="@+id/l_fakun_b_keluar"
-            android:layout_width="wrap_content"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="KELUAR" />
+            android:layout_marginTop="16dp"
+            android:text="@string/action_keluar"
+            android:textStyle="bold"
+            android:background="@drawable/button"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
-
 </FrameLayout>
