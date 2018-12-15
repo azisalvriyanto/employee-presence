@@ -53,7 +53,7 @@ public class AMenu extends AppCompatActivity {
                     initFragment(new AMenuFRiwayat());
                     return true;
                 case R.id.l_b_akun:
-                    setTitle("Akun");
+                    setTitle("Absensi");
                     initFragment(new AMenuFAkun());
                     return true;
                 default:

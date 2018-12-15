@@ -3,6 +3,7 @@ package azisalvriyanto.uinsunankalijaga;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -19,6 +20,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,21 +29,30 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.Manifest.permission.READ_CONTACTS;
+import azisalvriyanto.uinsunankalijaga.Api.ApiClient;
+import azisalvriyanto.uinsunankalijaga.Api.ApiService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
-/**
- * A login screen that offers login via username/password.
- */
+import static android.Manifest.permission.READ_CONTACTS;
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
+import azisalvriyanto.uinsunankalijaga.Model.ModelMasuk;
+
 public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-    /**
-     * Id to identity READ_CONTACTS permission request.
-     */
     private static final int REQUEST_READ_CONTACTS = 0;
 
     /**
@@ -61,6 +72,8 @@ public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor>
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    //tambahan
+    LinearLayout mMasukView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +81,6 @@ public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor>
         setContentView(R.layout.l_masuk);
         // Set up the login form.
         mUsernameView = (AutoCompleteTextView) findViewById(R.id.l_et_nip);
-        populateAutoComplete();
-
         mPasswordView = (EditText) findViewById(R.id.l_et_password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -82,18 +93,76 @@ public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor>
             }
         });
 
+        mMasukView = findViewById(R.id.masuk_form);
+
+        //tambahan
+        if(SaveSharedPreference.getLoggedStatus(getApplicationContext())) {
+            Intent intent = new Intent(getApplicationContext(), AMenu.class);
+            startActivity(intent);
+        } else {
+            mMasukView.setVisibility(View.VISIBLE);
+        }
+        //tambahan_selesai
+
         Button mMasuk = findViewById(R.id.l_b_masuk);
         mMasuk.setOnClickListener(new OnClickListener() {
-            Intent a_menu = new Intent(AMasuk.this, AMenu.class);
+            //Intent a_menu = new Intent(AMasuk.this, AMenu.class);
             public void onClick(View view) {
                 attemptLogin();
-                startActivity(a_menu);
+                masuk_coba(mUsernameView.getText().toString(), mPasswordView.getText().toString());
+                //startActivity(a_menu);
             }
         });
 
         mLoginFormView = findViewById(R.id.masuk_form);
         mProgressView = findViewById(R.id.masuk_progress);
     }
+
+
+
+
+
+    private void masuk_coba(String username, String password) {
+        Retrofit apiClient = ApiClient.getClient();
+        ApiService apiService = apiClient.create(ApiService.class);
+        Call<ModelMasuk> call = apiService.masuk(username, password);
+        call.enqueue(new Callback<ModelMasuk>() {
+            @Override
+            public void onResponse(Call<ModelMasuk> call, Response<ModelMasuk> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        if (response.body().getStatus().equals("sukses")) {
+                            //Set Logged In statue to 'true'
+                            ModelMasuk data = response.body();
+                            String data_nip = data.getData().getNip();
+                            Toast.makeText(getApplicationContext(), data_nip, Toast.LENGTH_SHORT).show();
+
+                            SaveSharedPreference.setLoggedIn(getApplication().getApplicationContext(), true);
+                            Intent intent = new Intent(getBaseContext(), AMenu.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Akun tidak ditemukan.", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        Toast.makeText(getApplicationContext(), "Response gagal 1.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Credentials are not valid.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModelMasuk> call, Throwable t) {
+                Log.e("TAG", "=======onFailure: " + t.toString());
+                t.printStackTrace();
+            }
+        });
+    }
+
+
+
+
 
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
@@ -129,8 +198,7 @@ public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor>
      * Callback received when a permissions request has been completed.
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_READ_CONTACTS) {
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 populateAutoComplete();

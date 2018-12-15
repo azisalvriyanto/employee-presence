@@ -28,7 +28,6 @@ public class AMenuFRiwayat extends Fragment {
         //return Fragment();
     }
 
-    //tambahan
     private ArrayList<ModelRiwayat> riwayatList;
     private ProgressDialog progressDialog;
     private RecyclerView recyclerView;
@@ -38,7 +37,7 @@ public class AMenuFRiwayat extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.l_menu_friwayat, container, false);
-        //TextView data = (TextView) fragmentView.findViewById(R.id.text_izin);
+        //TextView data = (TextView) view.findViewById(R.id.text_izin);
         //data.setText("asw");
 
         //DARI SINI

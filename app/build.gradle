@@ -30,8 +30,13 @@ dependencies {
 
     // GSON with Retrofit
     implementation 'com.google.code.gson:gson:2.8.2'
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
     //RecyclerView Dependency
     implementation 'com.android.support:recyclerview-v7:28.0.0'
+    //login
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:3.9.0'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.6.0'
 }

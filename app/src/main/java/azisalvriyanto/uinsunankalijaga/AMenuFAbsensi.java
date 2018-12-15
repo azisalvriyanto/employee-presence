@@ -1,12 +1,20 @@
 package azisalvriyanto.uinsunankalijaga;
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import azisalvriyanto.uinsunankalijaga.Api.ApiClient;
+import azisalvriyanto.uinsunankalijaga.Api.ApiService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class AMenuFAbsensi extends Fragment {
     public AMenuFAbsensi() {
@@ -14,16 +22,11 @@ public class AMenuFAbsensi extends Fragment {
         //return Fragment();
     }
 
-//    public static AbsensiFragment newInstance(String param1, String param2) {
-//        StoreFragment fragment = new StoreFragment();
-//        Bundle args = new Bundle();
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.l_menu_fabsensi, null);
+        View view = inflater.inflate(R.layout.l_menu_fabsensi, container, false);
+
+        return view;
     }
 }
