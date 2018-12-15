@@ -9,7 +9,7 @@ public class ModelMasuk {
     private String status;
     @SerializedName("data")
     @Expose
-    private ModelData data;
+    private ModelMasukData data;
 
     public String getStatus() {
         return status;
@@ -19,11 +19,11 @@ public class ModelMasuk {
         this.status = status;
     }
 
-    public ModelData getData() {
+    public ModelMasukData getData() {
         return data;
     }
 
-    public void setData(ModelData data) {
+    public void setData(ModelMasukData data) {
         this.data = data;
     }
 }

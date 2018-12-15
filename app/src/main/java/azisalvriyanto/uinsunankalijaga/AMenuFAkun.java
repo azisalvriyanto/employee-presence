@@ -25,12 +25,14 @@ public class AMenuFAkun extends Fragment {
         View view = inflater.inflate(R.layout.l_menu_fakun, container, false);
 
         b_keluar = view.findViewById(R.id.l_fakun_b_keluar);
-
         b_keluar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Set LoggedIn status to false
-                SaveSharedPreference.setLoggedIn(getActivity().getApplicationContext(), false);
+                String pegawaiNIP = SaveSharedPreference.getNIP(getActivity().getApplicationContext());
+                Toast.makeText(getActivity().getApplicationContext(), pegawaiNIP, Toast.LENGTH_SHORT).show();
+
+                SaveSharedPreference.setLoggedIn(getActivity().getApplicationContext(), false, "Default");
                 Intent intent = new Intent(getActivity().getApplicationContext(), AMasuk.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);

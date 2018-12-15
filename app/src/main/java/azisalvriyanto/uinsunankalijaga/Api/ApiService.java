@@ -13,9 +13,9 @@ public interface ApiService {
     Call<ModelRiwayatList> getMyJSON();
 
     @FormUrlEncoded
-    @POST("aa_akun.php")
+    @POST("aa_masuk.php")
     Call<ModelMasuk> masuk(@Field("nip") String username, @Field("password") String password);
 
-    @POST("aa_akun.php")
+    @POST("aa_masuk.php")
     Call<ModelMasuk> keluar();
 }

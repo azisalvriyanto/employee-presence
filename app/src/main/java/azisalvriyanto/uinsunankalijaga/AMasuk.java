@@ -132,12 +132,12 @@ public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor>
                 if (response.isSuccessful()) {
                     try {
                         if (response.body().getStatus().equals("sukses")) {
-                            //Set Logged In statue to 'true'
-                            ModelMasuk data = response.body();
-                            String data_nip = data.getData().getNip();
-                            Toast.makeText(getApplicationContext(), data_nip, Toast.LENGTH_SHORT).show();
+                            //ModelMasuk data = response.body();
+                            //String data_nip = data.getData().getNIP();
+                            //Toast.makeText(getApplicationContext(), data_nip, Toast.LENGTH_SHORT).show();
 
-                            SaveSharedPreference.setLoggedIn(getApplication().getApplicationContext(), true);
+                            //Set Logged In statue to 'true'
+                            SaveSharedPreference.setLoggedIn(getApplication().getApplicationContext(), true, "asw");
                             Intent intent = new Intent(getBaseContext(), AMenu.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
@@ -145,7 +145,7 @@ public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor>
                             Toast.makeText(getApplicationContext(), "Akun tidak ditemukan.", Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {
-                        Toast.makeText(getApplicationContext(), "Response gagal 1.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Response gagal.", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "Credentials are not valid.", Toast.LENGTH_SHORT).show();
