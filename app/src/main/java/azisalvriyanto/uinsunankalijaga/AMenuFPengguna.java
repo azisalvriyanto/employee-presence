@@ -38,6 +38,14 @@ public class AMenuFPengguna extends Fragment {
         final View view = inflater.inflate(R.layout.l_menu_fpengguna, container, false);
         final String username = SaveSharedPreference.getNIP(getActivity().getApplicationContext());
 
+        //dialog
+        progressDialog = new ProgressDialog(getActivity());
+
+        progressDialog.setMessage("Mohon tunggu...");
+        progressDialog.setIndeterminate(false);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
         //retrofit
         final Retrofit apiClient = ApiClient.getClient();
         final ApiService apiService = apiClient.create(ApiService.class);
@@ -77,6 +85,8 @@ public class AMenuFPengguna extends Fragment {
                             data_fakultas_tv.setText(data_fakultas);
                             data_golongan_tv.setText(data_golongan);
                             data_email_tv.setText(data_email);
+
+                            progressDialog.dismiss();
                         } else {
                             Toast.makeText(getActivity().getApplicationContext(), "Akun tidak ditemukan.", Toast.LENGTH_SHORT).show();
                         }
@@ -92,6 +102,7 @@ public class AMenuFPengguna extends Fragment {
             public void onFailure(Call<ModelPengguna> call, Throwable t) {
                 Log.e("TAG", "=======onFailure: " + t.toString());
                 t.printStackTrace();
+                progressDialog.dismiss();
             }
         });
 
@@ -111,6 +122,11 @@ public class AMenuFPengguna extends Fragment {
         b_perbaharui.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.setMessage("Mohon tunggu...");
+                progressDialog.setIndeterminate(false);
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+
                 Call<ModelPenggunaPerbaharui> perbaharui = apiService.pengguna_perbaharui(
                         data_nip_tv.getText().toString(),
                         data_nama_tv.getText().toString(),
@@ -125,10 +141,25 @@ public class AMenuFPengguna extends Fragment {
                 perbaharui.enqueue(new Callback<ModelPenggunaPerbaharui>() {
                     @Override
                     public void onResponse(Call<ModelPenggunaPerbaharui> call, Response<ModelPenggunaPerbaharui> response) {
+                        progressDialog.dismiss();
                         if (response.isSuccessful()) {
                             try {
-                                Toast.makeText(getActivity().getApplicationContext(), response.body().getPesan(), Toast.LENGTH_SHORT).show();
+                                /*if (response.body().getStatus().equals("sukses")) {
+                                    progressDialog.setMessage("Data berhasil diperbaharui.");
+                                    progressDialog.setIndeterminate(false);
+                                    progressDialog.setCancelable(false);
+                                    progressDialog.show();
+                                    //getActivity().finish();
+                                    //startActivity(getActivity().getApplicationContext());
+                                }
+                                else {
+                                    progressDialog.setMessage("Data gagal diperbaharui.");
+                                    progressDialog.setIndeterminate(false);
+                                    progressDialog.setCancelable(false);
+                                    progressDialog.show();
+                                }
 
+                                progressDialog.dismiss();*/
                             } catch (Exception e) {
                                 Toast.makeText(getActivity().getApplicationContext(), "Response gagal.", Toast.LENGTH_SHORT).show();
                             }
@@ -141,6 +172,7 @@ public class AMenuFPengguna extends Fragment {
                     public void onFailure(Call<ModelPenggunaPerbaharui> call, Throwable t) {
                         Log.e("TAG", "=======onFailure: " + t.toString());
                         t.printStackTrace();
+                        progressDialog.dismiss();
                     }
                 });
             }

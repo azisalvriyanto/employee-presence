@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".AMenuFPengguna"
-    android:layout_marginBottom="60dp" >
+    android:layout_marginBottom="60dp"
+    android:id="@+id/aswjembud">
 
     <ScrollView
         android:layout_width="fill_parent"

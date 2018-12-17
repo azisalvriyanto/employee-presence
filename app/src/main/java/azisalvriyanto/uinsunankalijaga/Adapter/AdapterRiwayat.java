@@ -8,14 +8,14 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import azisalvriyanto.uinsunankalijaga.Model.ModelRiwayat;
+import azisalvriyanto.uinsunankalijaga.Model.ModelRiwayatData;
 import azisalvriyanto.uinsunankalijaga.R;
 
 public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.CustomViewHolder> {
-    private List<ModelRiwayat> riwayatList;
+    private List<ModelRiwayatData> data;
 
-    public AdapterRiwayat(List<ModelRiwayat> riwayatList) {
-        this.riwayatList = riwayatList;
+    public AdapterRiwayat(List<ModelRiwayatData> data) {
+        this.data = data;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.CustomVi
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
-        ModelRiwayat riwayat = riwayatList.get(position);
+        ModelRiwayatData riwayat = data.get(position);
         holder.a_friwayat_jenis.setText(riwayat.getJenis());
         holder.a_friwayat_waktu.setText(riwayat.getWaktu());
         holder.a_friwayat_tanggal.setText(riwayat.getTanggal());
@@ -36,7 +36,7 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.CustomVi
 
     @Override
     public int getItemCount() {
-        return riwayatList.size();
+        return data.size();
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
@@ -44,9 +44,9 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.CustomVi
 
         public CustomViewHolder(View view) {
             super(view);
-            a_friwayat_jenis = (TextView) view.findViewById(R.id.l_friwayat_jenis);
-            a_friwayat_waktu = (TextView) view.findViewById(R.id.l_friwayat_waktu);
-            a_friwayat_tanggal = (TextView) view.findViewById(R.id.l_friwayat_tanggal);
+            a_friwayat_jenis    = (TextView) view.findViewById(R.id.l_friwayat_jenis);
+            a_friwayat_waktu    = (TextView) view.findViewById(R.id.l_friwayat_waktu);
+            a_friwayat_tanggal  = (TextView) view.findViewById(R.id.l_friwayat_tanggal);
         }
     }
 }

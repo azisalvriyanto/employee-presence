@@ -3,38 +3,29 @@ package azisalvriyanto.uinsunankalijaga.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class ModelRiwayat {
-    @SerializedName("jenis")
+    @SerializedName("status")
     @Expose
-    private String jenis;
-    @SerializedName("waktu")
+    private String status;
+    @SerializedName("hasil")
     @Expose
-    private String waktu;
-    @SerializedName("tanggal")
-    @Expose
-    private String tanggal;
+    private ArrayList<ModelRiwayatData> data = null;
 
-    public String getJenis() {
-        return jenis;
+    public String getStatus() {
+        return status;
     }
 
-    public void setJenis(String jenis) {
-        this.jenis = jenis;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getWaktu() {
-        return waktu;
+    public ArrayList<ModelRiwayatData> getData() {
+        return data;
     }
 
-    public void setWaktu(String waktu) {
-        this.waktu = waktu;
-    }
-
-    public String getTanggal() {
-        return tanggal;
-    }
-
-    public void setTanggal(String tanggal) {
-        this.tanggal = tanggal;
+    public void setData(ArrayList<ModelRiwayatData> data) {
+        this.data = data;
     }
 }
