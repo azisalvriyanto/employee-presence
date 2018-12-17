@@ -3,7 +3,7 @@ package azisalvriyanto.uinsunankalijaga.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ModelMasuk {
+public class ModelPenggunaPerbaharui {
     @SerializedName("status")
     @Expose
     private String status;

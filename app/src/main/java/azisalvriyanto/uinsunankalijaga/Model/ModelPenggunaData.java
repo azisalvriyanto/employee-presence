@@ -10,9 +10,24 @@ public class ModelPenggunaData {
     @SerializedName("nama")
     @Expose
     private String nama;
+    @SerializedName("lahir_tempat")
+    @Expose
+    private String lahirTempat;
     @SerializedName("lahir_tanggal")
     @Expose
     private String lahirTanggal;
+    @SerializedName("jkelamin")
+    @Expose
+    private String jkelamin;
+    @SerializedName("fakultas")
+    @Expose
+    private String fakultas;
+    @SerializedName("golongan")
+    @Expose
+    private String golongan;
+    @SerializedName("email")
+    @Expose
+    private String email;
 
     public String getNIP() {
         return nip;
@@ -30,11 +45,51 @@ public class ModelPenggunaData {
         this.nama = nama;
     }
 
+    public String getLahirTempat() {
+        return lahirTempat;
+    }
+
+    public void getLahirTempat(String lahirTempat) {
+        this.lahirTempat = lahirTempat;
+    }
+
     public String getLahirTanggal() {
         return lahirTanggal;
     }
 
     public void setLahirTanggal(String lahirTanggal) {
         this.lahirTanggal = lahirTanggal;
+    }
+
+    public String getJKelamin() {
+        return jkelamin;
+    }
+
+    public void setJKelamin(String jkelamin) {
+        this.jkelamin = jkelamin;
+    }
+
+    public String getFakultas() {
+        return fakultas;
+    }
+
+    public void setFakultas(String fakultas) {
+        this.fakultas = fakultas;
+    }
+
+    public String getGolongn() {
+        return golongan;
+    }
+
+    public void setGolongn(String golongan) {
+        this.golongan = golongan;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

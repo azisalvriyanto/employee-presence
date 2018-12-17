@@ -16,11 +16,13 @@ import java.util.ArrayList;
 import azisalvriyanto.uinsunankalijaga.Adapter.AdapterRiwayat;
 import azisalvriyanto.uinsunankalijaga.Api.ApiClient;
 import azisalvriyanto.uinsunankalijaga.Api.ApiService;
+import azisalvriyanto.uinsunankalijaga.Model.ModelPengguna;
 import azisalvriyanto.uinsunankalijaga.Model.ModelRiwayat;
 import azisalvriyanto.uinsunankalijaga.Model.ModelRiwayatList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class AMenuFRiwayat extends Fragment {
     public AMenuFRiwayat() {
@@ -36,27 +38,25 @@ public class AMenuFRiwayat extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.l_menu_friwayat, container, false);
-        //TextView data = (TextView) view.findViewById(R.id.text_izin);
-        //data.setText("asw");
+        final View view = inflater.inflate(R.layout.l_menu_friwayat, container, false);
+        final String username = SaveSharedPreference.getNIP(getActivity().getApplicationContext());
 
         //DARI SINI
-        progressDialog = new ProgressDialog(getActivity());
+        progressDialog = new ProgressDialog(getActivity().getApplicationContext());
         progressDialog.setMessage("Mohon tunggu...");
         progressDialog.setIndeterminate(false);
         progressDialog.setCancelable(false);
         progressDialog.show();
 
         //Creating an object of our api interface
-        ApiService api = ApiClient.getApiService();
-
-        Call<ModelRiwayatList> call = api.getMyJSON();
+        Retrofit apiClient = ApiClient.getClient();
+        ApiService apiService = apiClient.create(ApiService.class);
+        Call<ModelRiwayatList> call = apiService.riwayat(username);
         call.enqueue(new Callback<ModelRiwayatList>() {
             @Override
             public void onResponse(Call<ModelRiwayatList> call, Response<ModelRiwayatList> response) {
                 //Dismiss Dialog
                 progressDialog.dismiss();
-
                 if (response.isSuccessful()) {
                     riwayatList = response.body().getRiwayat();
                     recyclerView = (RecyclerView) recyclerView.findViewById(R.id.friwayat_layout);

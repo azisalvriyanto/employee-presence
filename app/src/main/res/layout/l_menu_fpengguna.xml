@@ -2,47 +2,207 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    tools:context=".AMenuFPengguna">
+    android:layout_height="wrap_content"
+    tools:context=".AMenuFPengguna"
+    android:layout_marginBottom="60dp" >
 
-    <LinearLayout
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/l_fakun_tv_nip"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Mohon tunggu..." />
-
-        <TextView
-            android:id="@+id/l_fakun_tv_nama"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Mohon tunggu..." />
-
-        <TextView
-            android:id="@+id/l_fakun_tv_lahirtanggal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Mohon tunggu..." />
-
-        <Button
-            android:id="@+id/l_fakun_b_keluar"
-            style="?android:textAppearanceSmall"
+        <LinearLayout
+            android:background="@color/colorAbu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/action_keluar"
-            android:textStyle="bold"
-            android:background="@drawable/button"
-            android:textColor="#FFFFFF" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
 
-    </LinearLayout>
+            <android.support.design.widget.TextInputLayout
+                android:background="@color/colorPutih"
+                android:layout_marginTop="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                <EditText
+                    android:id="@+id/l_fpengguna_nip_et"
+                    android:hint="Nomer Induk Pegawai"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:inputType="numberSigned"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:background="@color/colorPutih"
+                android:layout_marginTop="3dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                <EditText
+                    android:id="@+id/l_fpengguna_nama_et"
+                    android:hint="Nama Lengkap"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:background="@color/colorPutih"
+                android:layout_marginTop="3dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                <EditText
+                    android:id="@+id/l_fpengguna_lahirtempat_et"
+                    android:hint="Tempat Lahir"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:background="@color/colorPutih"
+                android:layout_marginTop="3dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                <EditText
+                    android:id="@+id/l_fpengguna_lahirtanggal_et"
+                    android:hint="Tanggal Lahir"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:background="@color/colorPutih"
+                android:layout_marginTop="3dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                <EditText
+                    android:id="@+id/l_fpengguna_jkelamin_et"
+                    android:hint="Jenis Kelamin"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:background="@color/colorPutih"
+                android:layout_marginTop="3dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                <EditText
+                    android:id="@+id/l_fpengguna_fakultas_et"
+                    android:hint="Fakultas"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:background="@color/colorPutih"
+                android:layout_marginTop="3dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                <EditText
+                    android:id="@+id/l_fpengguna_golongan_et"
+                    android:hint="Golongan"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:background="@color/colorPutih"
+                android:layout_marginTop="3dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                <EditText
+                    android:id="@+id/l_fpengguna_email_et"
+                    android:hint="Email"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/l_fpengguna_b_perbaharui"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:text="Simpan Perubahan"
+                android:textStyle="bold"
+                android:background="@drawable/button"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/l_fpengguna_b_keluar"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:text="@string/action_keluar"
+                android:textStyle="bold"
+                android:background="@drawable/button"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>

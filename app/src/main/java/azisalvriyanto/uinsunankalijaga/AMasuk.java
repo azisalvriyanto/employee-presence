@@ -3,6 +3,7 @@ package azisalvriyanto.uinsunankalijaga;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -94,23 +95,19 @@ public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor>
         });
 
         mMasukView = findViewById(R.id.masuk_form);
-
-        //tambahan
         if(SaveSharedPreference.getLoggedStatus(getApplicationContext())) {
             Intent intent = new Intent(getApplicationContext(), AMenu.class);
             startActivity(intent);
+            finish();
         } else {
             mMasukView.setVisibility(View.VISIBLE);
         }
-        //tambahan_selesai
 
         Button mMasuk = findViewById(R.id.l_b_masuk);
         mMasuk.setOnClickListener(new OnClickListener() {
-            //Intent a_menu = new Intent(AMasuk.this, AMenu.class);
             public void onClick(View view) {
                 attemptLogin();
                 masuk_coba(mUsernameView.getText().toString(), mPasswordView.getText().toString());
-                //startActivity(a_menu);
             }
         });
 
@@ -118,7 +115,7 @@ public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor>
         mProgressView = findViewById(R.id.masuk_progress);
     }
 
-    private void masuk_coba(String username, String password) {
+    private void masuk_coba(final String username, final String password) {
         Retrofit apiClient = ApiClient.getClient();
         ApiService apiService = apiClient.create(ApiService.class);
         Call<ModelMasuk> call = apiService.masuk(username, password);
@@ -128,17 +125,17 @@ public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor>
                 if (response.isSuccessful()) {
                     try {
                         if (response.body().getStatus().equals("sukses")) {
-                            ModelMasuk data = response.body();
-                            String data_nip = data.getData().getNIP();
-                            Toast.makeText(getApplicationContext(), data_nip, Toast.LENGTH_SHORT).show();
-
                             //Set Logged In statue to 'true'
-                            SaveSharedPreference.setLoggedIn(getApplication().getApplicationContext(), true, data_nip);
+                            SaveSharedPreference.setLoggedIn(getApplication().getApplicationContext(), true, username);
                             Intent intent = new Intent(getApplication().getApplicationContext(), AMenu.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
+                            finish();
                         } else {
                             Toast.makeText(getApplicationContext(), "Akun tidak ditemukan.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplication().getApplicationContext(), AMasuk.class);
+                            startActivity(intent);
+                            finish();
                         }
                     } catch (Exception e) {
                         Toast.makeText(getApplicationContext(), "Response gagal.", Toast.LENGTH_SHORT).show();

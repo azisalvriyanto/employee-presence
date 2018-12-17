@@ -20,7 +20,7 @@ import okhttp3.JavaNetCookieJar;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 public class ApiClient {
-    public static final String BASE_URL = "http://trainstays.com/hmkk/";  // Production
+    public static final String BASE_URL = "http://presensi-pegawai.msftrailers.co.za/api/";  // Production
 
     private static Retrofit retrofit = null;
     private static boolean checkClient(){
@@ -45,7 +45,7 @@ public class ApiClient {
         }
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        // set your desired log leve
+        //set your desired log leve
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         CookieHandler cookieHandler = new CookieManager();

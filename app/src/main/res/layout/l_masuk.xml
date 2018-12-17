@@ -16,10 +16,8 @@
         android:id="@+id/masuk_progress"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_height="match_parent"
         android:visibility="gone" />
-
     <ScrollView
         android:id="@+id/masuk_scroll"
         android:layout_width="match_parent"
