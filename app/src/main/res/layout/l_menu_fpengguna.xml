@@ -1,209 +1,369 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".AMenuFPengguna"
-    android:layout_marginBottom="60dp"
-    android:id="@+id/aswjembud">
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    tools:context=".AMenuFPengguna">
 
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:background="@color/colorAbu"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical" >
-
-            <android.support.design.widget.TextInputLayout
-                android:background="@color/colorPutih"
-                android:layout_marginTop="20dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="5dp"
-                android:layout_width="match_parent"
+            android:background="@color/colorAbu">
+            <RelativeLayout
+                android:id="@+id/l_fpengguna_pengguna"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content" >
-                <EditText
-                    android:id="@+id/l_fpengguna_nip_et"
-                    android:hint="Nomer Induk Pegawai"
+                <ImageView
+                    android:id="@+id/l_fpengguna_pengguna_foto"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@mipmap/ic_foto_default" />
+
+                <TextView
+                    android:id="@+id/l_fpengguna_pengguna_nama"
+                    android:text="Mohon tunggu..."
                     android:textSize="16dp"
                     android:textStyle="bold"
-                    android:inputType="numberSigned"
+                    android:textColor="@color/colorPrimaryText"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="90dp"
+                    android:layout_marginLeft="80dp" />
+
+                <TextView
+                    android:id="@+id/l_fpengguna_pengguna_nip"
+                    android:text="Mohon tunggu..."
+                    android:textSize="24sp"
+                    android:textColor="@color/colorPrimaryText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_below="@+id/l_fpengguna_pengguna_nama"
+                    android:layout_alignLeft="@+id/l_fpengguna_pengguna_nama" />
 
-            <android.support.design.widget.TextInputLayout
-                android:background="@color/colorPutih"
-                android:layout_marginTop="3dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-                <EditText
-                    android:id="@+id/l_fpengguna_nama_et"
-                    android:hint="Nama Lengkap"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
+                <View
+                    android:id="@+id/l_fpengguna_pengguna_line"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_height="1dip"
+                    android:layout_below="@+id/l_fpengguna_pengguna_foto"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorAbuTua" />
+            </RelativeLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:background="@color/colorPutih"
-                android:layout_marginTop="3dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-                <EditText
-                    android:id="@+id/l_fpengguna_lahirtempat_et"
-                    android:hint="Tempat Lahir"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:background="@color/colorPutih"
-                android:layout_marginTop="3dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-                <EditText
-                    android:id="@+id/l_fpengguna_lahirtanggal_et"
-                    android:hint="Tanggal Lahir"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:background="@color/colorPutih"
-                android:layout_marginTop="3dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-                <EditText
-                    android:id="@+id/l_fpengguna_jkelamin_et"
-                    android:hint="Jenis Kelamin"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:background="@color/colorPutih"
-                android:layout_marginTop="3dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-                <EditText
-                    android:id="@+id/l_fpengguna_fakultas_et"
-                    android:hint="Fakultas"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:background="@color/colorPutih"
-                android:layout_marginTop="3dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-                <EditText
-                    android:id="@+id/l_fpengguna_golongan_et"
-                    android:hint="Golongan"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:background="@color/colorPutih"
-                android:layout_marginTop="3dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-                <EditText
-                    android:id="@+id/l_fpengguna_email_et"
-                    android:hint="Email"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
-
-            <Button
-                android:id="@+id/l_fpengguna_b_perbaharui"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
+            <RelativeLayout
+                android:id="@+id/l_fpengguna_lahir"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp"
-                android:text="Simpan Perubahan"
-                android:textStyle="bold"
-                android:background="@drawable/button"
-                android:textColor="#FFFFFF" />
+                android:layout_below="@+id/l_fpengguna_pengguna"
+                android:background="@color/colorPutih" >
+                <TextView
+                    android:id="@+id/l_fpengguna_lahir_label"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:text="Tempat,\nTanggal Lahir"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorSecondaryText" />
 
-            <Button
-                android:id="@+id/l_fpengguna_b_keluar"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/l_fpengguna_lahir_td"
+                    android:layout_width="15dp"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="125dp"
+                    android:text=":"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/l_fpengguna_lahir_value"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="140dp"
+                    android:text="Mohon tunggu..."
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <View
+                    android:id="@+id/l_fpengguna_lahir_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/colorAbuTua" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/l_fpengguna_jkelamin"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp"
-                android:text="@string/action_keluar"
-                android:textStyle="bold"
-                android:background="@drawable/button"
-                android:textColor="#FFFFFF" />
-        </LinearLayout>
+                android:layout_below="@+id/l_fpengguna_lahir"
+                android:background="@color/colorPutih">
+                <View
+                    android:id="@+id/l_fpengguna_pengguna_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorAbuTua" />
+                <TextView
+                    android:id="@+id/l_fpengguna_jkelamin_label"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="Jenis Kelamin"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorSecondaryText" />
+
+                <TextView
+                    android:id="@+id/l_fpengguna_jkelamin_td"
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="125dp"
+                    android:text=":"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textAlignment="center"  />
+
+                <TextView
+                    android:id="@+id/l_fpengguna_jkelamin_value"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="140dp"
+                    android:text="Mohon tunggu..."
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <View
+                    android:id="@+id/l_fpengguna_jkelamin_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/colorAbuTua" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/l_fpengguna_golongan"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/l_fpengguna_jkelamin"
+                android:background="@color/colorPutih"
+                android:layout_marginTop="10dp" >
+                <TextView
+                    android:id="@+id/l_fpengguna_golongan_label"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="Golongan"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorSecondaryText" />
+
+                <TextView
+                    android:id="@+id/l_fpengguna_golongan_td"
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="125dp"
+                    android:text=":"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textAlignment="center"  />
+
+                <TextView
+                    android:id="@+id/l_fpengguna_golongan_value"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="140dp"
+                    android:text="Mohon tunggu..."
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <View
+                    android:id="@+id/l_fpengguna_golongan_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/colorAbuTua" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/l_fpengguna_fakultas"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/l_fpengguna_golongan"
+                android:background="@color/colorPutih"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:id="@+id/l_fpengguna_fakultas_label"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="Fakultas"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorSecondaryText" />
+
+                <TextView
+                    android:id="@+id/l_fpengguna_fakultas_td"
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="125dp"
+                    android:text=":"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textAlignment="center"  />
+
+                <TextView
+                    android:id="@+id/l_fpengguna_fakultas_value"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="140dp"
+                    android:text="Mohon tunggu..."
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <View
+                    android:id="@+id/l_fpengguna_fakultas_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="0dp"
+                    android:background="@color/colorAbuTua" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/l_fpengguna_email"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/l_fpengguna_fakultas"
+                android:background="@color/colorPutih"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:id="@+id/l_fpengguna_email_label"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="Surel"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorSecondaryText" />
+
+                <TextView
+                    android:id="@+id/l_fpengguna_email_td"
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="125dp"
+                    android:text=":"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textAlignment="center"  />
+
+                <TextView
+                    android:id="@+id/l_fpengguna_email_value"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="140dp"
+                    android:text="Mohon tunggu..."
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <View
+                    android:id="@+id/l_fpengguna_email_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/colorAbuTua" />
+            </RelativeLayout>
+
+
+
+
+            <RelativeLayout
+                android:id="@+id/l_fpengguna_keluar"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/l_fpengguna_email"
+                android:background="@color/colorPutih"
+                android:layout_marginTop="10dp">
+                <Button
+                    android:id="@+id/l_fpengguna_keluar_b"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:text="Keluar"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorMerah"
+                    android:textAlignment="center"
+                    android:background="@color/colorPutih"/>
+
+                <View
+                    android:id="@+id/l_fpengguna_keluar_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/colorAbuTua" />
+            </RelativeLayout>
+        </RelativeLayout>
     </ScrollView>
 </FrameLayout>

@@ -4,5 +4,9 @@
     <color name="colorPrimaryDark">#363636</color>
     <color name="colorAccent">#CDB375</color>
     <color name="colorAbu">#f2f2f2</color>
+    <color name="colorAbuTua">#d9d9d9</color>
     <color name="colorPutih">#ffffff</color>
+    <color name="colorMerah">#ff0000</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#727272</color>
 </resources>

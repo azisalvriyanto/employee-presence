@@ -1,42 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_main"
-    android:layout_width="match_parent"
+    android:id="@+id/l_menu_friwayat_list"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="13dp">
+    android:paddingTop="15dip"
+    android:clickable="true" >
 
-    <TextView
-        android:id="@+id/l_friwayat_jenis"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="17dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginTop="13dp"
-        android:text="Mohon tunggu..."
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="24sp" />
+        <ImageView
+            android:id="@+id/l_friwayat_status_img"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="0dp"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp" />
 
-    <TextView
-        android:id="@+id/l_friwayat_waktu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/l_friwayat_jenis"
-        android:layout_alignEnd="@+id/l_friwayat_tanggal"
-        android:layout_alignRight="@+id/l_friwayat_tanggal"
-        android:text="Mohon tunggu..." />
+        <TextView
+            android:id="@+id/l_friwayat_jenis"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignWithParentIfMissing="true"
+            android:gravity="center_vertical"
+            android:text="Mohon tunggu..."
+            android:textSize="18sp"
+            android:paddingLeft="5dp"
+            android:textColor="@color/colorPrimaryText"
+            android:layout_alignTop="@+id/l_friwayat_status_img"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="16dp" />
 
-    <TextView
-        android:id="@+id/l_friwayat_tanggal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/l_friwayat_waktu"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="27dp"
-        android:layout_marginRight="27dp"
-        android:text="Mohon tunggu..." />
+        <TextView
+            android:id="@+id/l_friwayat_status"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="Mohon tunggu..."
+            android:textSize="12sp"
+            android:paddingLeft="5dp"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_below="@+id/l_friwayat_jenis"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="16dp" />
+
+        <TextView
+            android:id="@+id/l_friwayat_waktu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Mohon tunggu..."
+            android:textSize="10sp"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_alignRight="@+id/l_friwayat_status"
+            android:layout_alignEnd="@+id/l_friwayat_status" />
+
+        <TextView
+            android:id="@+id/l_friwayat_tanggal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Mohon tunggu..."
+            android:textSize="10sp"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_below="@+id/l_friwayat_waktu"
+            android:layout_alignRight="@+id/l_friwayat_status"
+            android:layout_alignEnd="@+id/l_friwayat_status" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="40dp"
+            android:layout_below="@+id/l_friwayat_status"
+            android:background="@color/colorAbu" />
 
 </RelativeLayout>

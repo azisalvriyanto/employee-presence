@@ -3,15 +3,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    tools:context=".AMenuFAbsensi">
-
-    <TextView
+    tools:context=".AMenuFAbsensi" >
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="absensi" />
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
 
+        <TextClock
+            android:id="@+id/l_friwayat_waktu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:timeZone="GMT+0700"
+            android:format24Hour="HH:mm:ss"
+            android:text="00:00:00"
+            android:textSize="60sp"
+            android:gravity="center" />
+
+        <TextClock
+            android:id="@+id/l_friwayat_tanggal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="50dp"
+            android:text="Mohon tunggu..."
+            android:textColor="@color/colorSecondaryText"
+            android:timeZone="GMT+0700"
+            android:format24Hour="EEEE, dd MMMM yyyy"
+            android:textSize="14sp"
+            android:gravity="right"
+            android:layout_marginBottom="20dp"/>
+
+        <Button
+            android:id="@+id/l_friwayat_absensi_b_absen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button"
+            android:layout_marginTop="16dp"
+            android:textColor="#FFFFFF"
+            android:text="ABSEN" />
+
+        <Button
+            android:id="@+id/l_friwayat_absensi_b_izinsakit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button"
+            android:textColor="#FFFFFF"
+            android:text="IZIN atau SAKIT" />
+
+    </LinearLayout>
 </FrameLayout>

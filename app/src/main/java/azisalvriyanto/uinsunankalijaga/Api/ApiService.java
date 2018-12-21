@@ -2,12 +2,15 @@ package azisalvriyanto.uinsunankalijaga.Api;
 
 import azisalvriyanto.uinsunankalijaga.Model.ModelMasuk;
 import azisalvriyanto.uinsunankalijaga.Model.ModelPengguna;
-import azisalvriyanto.uinsunankalijaga.Model.ModelPenggunaPerbaharui;
 import azisalvriyanto.uinsunankalijaga.Model.ModelRiwayat;
+import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface ApiService {
     @FormUrlEncoded
@@ -17,6 +20,19 @@ public interface ApiService {
             @Field("password") String password
     );
 
+    @Multipart
+    @POST("riwayat_tambah.php")
+    Call<ResponseBody> absensi(
+            @Field("jenis") String jenis,
+            @Field("nip") String username,
+            @Field("tanggal") String tanggal,
+            @Field("waktu") String waktu,
+            @Field("latitude") String latitude,
+            @Field("longitude") String longitude,
+            @Part MultipartBody.Part berkas,
+            @Field("keterangan") String keterangan
+    );
+
     @FormUrlEncoded
     @POST("riwayat.php")
     Call<ModelRiwayat> riwayat(@Field("nip") String username);
@@ -24,17 +40,4 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("pengguna.php")
     Call<ModelPengguna> pengguna(@Field("nip") String username);
-
-    @FormUrlEncoded
-    @POST("pengguna_perbaharui.php")
-    Call<ModelPenggunaPerbaharui> pengguna_perbaharui(
-            @Field("nip") String username,
-            @Field("nama") String nama,
-            @Field("lahir_tempat") String lahir_tempat,
-            @Field("lahir_tanggal") String lahir_tanggal,
-            @Field("jkelamin") String jkelamin,
-            @Field("fakultas") String fakultas,
-            @Field("golongan") String golongan,
-            @Field("email") String email
-    );
 }

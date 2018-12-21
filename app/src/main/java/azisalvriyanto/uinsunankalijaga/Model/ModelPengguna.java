@@ -14,7 +14,6 @@ public class ModelPengguna {
     public String getStatus() {
         return status;
     }
-
     public void setStatus(String status) {
         this.status = status;
     }
@@ -22,7 +21,6 @@ public class ModelPengguna {
     public ModelPenggunaData getData() {
         return data;
     }
-
     public void setData(ModelPenggunaData data) {
         this.data = data;
     }

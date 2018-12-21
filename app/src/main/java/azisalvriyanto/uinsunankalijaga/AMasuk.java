@@ -3,24 +3,21 @@ package azisalvriyanto.uinsunankalijaga;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -34,15 +31,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import azisalvriyanto.uinsunankalijaga.Api.ApiClient;
 import azisalvriyanto.uinsunankalijaga.Api.ApiService;
+import azisalvriyanto.uinsunankalijaga.Model.ModelMasuk;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,7 +44,6 @@ import retrofit2.Retrofit;
 
 import static android.Manifest.permission.READ_CONTACTS;
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
-import azisalvriyanto.uinsunankalijaga.Model.ModelMasuk;
 
 public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
@@ -217,7 +210,7 @@ public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor>
         boolean cancel = false;
         View focusView = null;
 
-        /*// Check for a valid password, if the user entered one.
+        // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
@@ -235,10 +228,9 @@ public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor>
             focusView = mUsernameView;
             cancel = true;
         } else if (!isUsernameValid(username)) {
-            mUsernameView.setError(getString(R.string.error_invalid_email));
             focusView = mUsernameView;
             cancel = true;
-        }*/
+        }
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first

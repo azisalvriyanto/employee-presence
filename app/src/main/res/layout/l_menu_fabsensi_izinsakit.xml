@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    tools:context=".AMenuFAbsensiIzinSakit">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:id="@+id/l_fabsensi_izinsakit_waktutanggal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp">
+                <TextClock
+                    android:id="@+id/l_fabsensi_izinsakit_waktutanggal_waktu"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="Mohon tunggu..."
+                    android:timeZone="GMT+0700"
+                    android:format24Hour="HH:mm:ss WIB"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorSecondaryText"
+                    android:gravity="right"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp" />
+
+                <TextClock
+                    android:id="@+id/l_fabsensi_izinsakit_waktutanggal_tanggal"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="Mohon tunggu..."
+                    android:timeZone="GMT+0700"
+                    android:format24Hour="EEEE, dd MMMM yyyy"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorSecondaryText"
+                    android:gravity="right"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_below="@+id/l_fabsensi_izinsakit_waktutanggal_waktu" />
+
+                <View
+                    android:id="@+id/l_fabsensi_izinsakit_waktutanggal_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_below="@+id/l_fabsensi_izinsakit_waktutanggal_tanggal"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorAbu" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/l_fabsensi_izinsakit_pengguna"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:layout_below="@+id/l_fabsensi_izinsakit_waktutanggal" >
+
+                <ImageView
+                    android:id="@+id/l_fabsensi_izinsakit_pengguna_foto"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_alignWithParentIfMissing="true"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="16dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignStart="@+id/l_fabsensi_izinsakit_pengguna_nama"
+                    android:src="@mipmap/ic_foto_default" />
+
+                <TextView
+                    android:id="@+id/l_fabsensi_izinsakit_pengguna_nama"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mohon tunggu..."
+                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="76dp" />
+
+                <TextView
+                    android:id="@+id/l_fabsensi_izinsakit_pengguna_nip"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mohon tunggu..."
+                    android:textSize="18sp"
+                    android:textColor="@color/colorSecondaryText"
+                    android:layout_below="@+id/l_fabsensi_izinsakit_pengguna_nama"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="76dp" />
+
+                <View
+                    android:id="@+id/l_fabsensi_izinsakit_pengguna_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_below="@+id/l_fabsensi_izinsakit_pengguna_nip"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorAbu" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/l_fabsensi_izinsakit_jenis"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/l_fabsensi_izinsakit_pengguna"
+                android:paddingTop="16dp" >
+
+                <TextView
+                    android:id="@+id/l_fabsensi_izinsakit_jenis_label"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Jenis"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorSecondaryText"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="3dp" />
+
+                <Spinner
+                    android:id="@+id/l_fabsensi_izinsakit_jenis_pilih"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:entries="@array/jenis_array"
+                    android:layout_below="@+id/l_fabsensi_izinsakit_jenis_label"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp" />
+
+                <View
+                    android:id="@+id/l_fabsensi_izinsakit_jenis_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_marginTop="16dp"
+                    android:layout_below="@+id/l_fabsensi_izinsakit_jenis_pilih"
+                    android:background="@color/colorAbu" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/l_fabsensi_izinsakit_geolocation"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/l_fabsensi_izinsakit_jenis"
+                android:paddingTop="16dp" >
+                <TextView
+                    android:id="@+id/l_fabsensi_detail_geolocation_label"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Geolocation"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorSecondaryText"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="3dp" />
+
+                <TextView
+                    android:id="@+id/l_fabsensi_izinsakit_geolocation_latitude_label"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Latitude"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:layout_below="@+id/l_fabsensi_detail_geolocation_label"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="30dp" />
+
+                <TextView
+                    android:id="@+id/l_fabsensi_izinsakit_geolocation_latitude"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mohon tunggu..."
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryText"
+                    android:layout_below="@+id/l_fabsensi_izinsakit_geolocation_latitude_label"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="30dp" />
+
+                <TextView
+                    android:id="@+id/l_fabsensi_izinsakit_geolocation_longitude_label"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Longitude"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:layout_below="@+id/l_fabsensi_izinsakit_geolocation_latitude"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="30dp" />
+
+                <TextView
+                    android:id="@+id/l_fabsensi_izinsakit_geolocation_longitude"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mohon tunggu..."
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryText"
+                    android:layout_below="@+id/l_fabsensi_izinsakit_geolocation_longitude_label"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="30dp" />
+
+                <View
+                    android:id="@+id/l_fabsensi_izinsakit_geolocation_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_marginTop="16dp"
+                    android:layout_below="@+id/l_fabsensi_izinsakit_geolocation_longitude"
+                    android:background="@color/colorAbu" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/l_fabsensi_izinsakit_keterangan"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/l_fabsensi_izinsakit_geolocation"
+                android:paddingTop="16dp" >
+                <TextView
+                    android:id="@+id/l_fabsensi_izinsakit_keterangan_label"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Keterangan"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorSecondaryText"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="3dp" />
+
+                <Button
+                    android:id="@+id/l_fabsensi_izinsakit_keterangan_berkas"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pilih berkas..."
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textAlignment="center"
+                    android:layout_below="@+id/l_fabsensi_izinsakit_keterangan_label"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp" />
+
+                <EditText
+                    android:id="@+id/l_fabsensi_izinsakit_keterangan_keterangan"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:hint="Tulis keterangan."
+                    android:textSize="16sp"
+                    android:inputType="text|textMultiLine"
+                    android:gravity="top"
+                    android:layout_below="@+id/l_fabsensi_izinsakit_keterangan_berkas"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp" />
+
+                <View
+                    android:id="@+id/l_fabsensi_izinsakit_keterangan_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_marginTop="16dp"
+                    android:layout_below="@+id/l_fabsensi_izinsakit_keterangan_keterangan"
+                    android:background="@color/colorAbu" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/l_fabsensi_absensi_b_kirim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/button"
+                android:textColor="#FFFFFF"
+                android:text="KIRIM"
+                android:layout_below="@+id/l_fabsensi_izinsakit_keterangan" />
+        </RelativeLayout>
+
+    </ScrollView>
+</FrameLayout>

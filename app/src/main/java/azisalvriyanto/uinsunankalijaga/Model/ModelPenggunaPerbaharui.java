@@ -14,7 +14,6 @@ public class ModelPenggunaPerbaharui {
     public String getStatus() {
         return status;
     }
-
     public void setStatus(String status) {
         this.status = status;
     }
@@ -22,7 +21,6 @@ public class ModelPenggunaPerbaharui {
     public String getPesan() {
         return pesan;
     }
-
     public void setPesan(String pesan) {
         this.pesan = pesan;
     }
