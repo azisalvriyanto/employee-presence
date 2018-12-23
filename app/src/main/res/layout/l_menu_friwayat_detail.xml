@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     android:id="@+id/l_menu_friwayat_detail"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,8 +11,23 @@
     <RelativeLayout
         android:id="@+id/l_friwayat_detail_informasi"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp" >
+        android:layout_height="wrap_content" >
+        <View
+            android:id="@+id/l_friwayat_detail_line_geser1"
+            android:layout_width="30dp"
+            android:layout_height="2dip"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="7dp"
+            android:background="@color/colorAbuTua" />
+        <View
+            android:id="@+id/l_friwayat_detail_line_geser2"
+            android:layout_width="30dp"
+            android:layout_height="2dip"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:background="@color/colorAbuTua"
+            android:layout_below="@+id/l_friwayat_detail_line_geser1" />
+
         <TextView
             android:id="@+id/l_friwayat_detail_jenis"
             android:layout_width="fill_parent"
@@ -20,9 +35,11 @@
             android:layout_alignWithParentIfMissing="true"
             android:gravity="center_vertical"
             android:text="Izin"
-            android:textSize="24sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimaryText"
+            android:layout_below="@+id/l_friwayat_detail_line_geser2"
+            android:layout_marginTop="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp" />
 
@@ -41,10 +58,11 @@
             android:id="@+id/l_friwayat_detail_waktu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10:11:12"
+            android:text="11:12:13"
             android:textSize="12sp"
             android:textColor="@color/colorSecondaryText"
             android:layout_marginTop="5dp"
+            android:layout_alignTop="@+id/l_friwayat_detail_jenis"
             android:layout_alignRight="@+id/l_friwayat_detail_status"
             android:layout_alignEnd="@+id/l_friwayat_detail_status" />
 
@@ -52,7 +70,7 @@
             android:id="@+id/l_friwayat_detail_tanggal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2018-12-21"
+            android:text="2018-12-16"
             android:textSize="12sp"
             android:textColor="@color/colorSecondaryText"
             android:layout_below="@+id/l_friwayat_detail_waktu"
@@ -70,7 +88,8 @@
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_below="@+id/l_friwayat_detail_informasi">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
@@ -95,7 +114,7 @@
                     android:id="@+id/l_friwayat_detail_nama"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Azis Alvriyanto"
+                    android:text="Dr. Agug Fatwanto, S.Si., M.Kom."
                     android:textSize="16sp"
                     android:textColor="@color/colorPrimaryText"
                     android:layout_marginRight="16dp"
@@ -105,7 +124,7 @@
                     android:id="@+id/l_friwayat_detail_nip"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="123456789012345678"
+                    android:text="123456789012345601"
                     android:textSize="18sp"
                     android:textColor="@color/colorSecondaryText"
                     android:layout_below="@+id/l_friwayat_detail_nama"
@@ -149,19 +168,19 @@
                     android:layout_below="@+id/l_friwayat_detail_geolocation_label"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginLeft="30dp" />
+                    android:layout_marginLeft="80dp" />
 
                 <TextView
                     android:id="@+id/l_friwayat_detail_latitude"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="123456789012345678"
+                    android:text="-7.78031849"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimaryText"
                     android:layout_below="@+id/l_friwayat_detail_latitude_label"
                     android:layout_marginRight="16dp"
-                    android:layout_marginLeft="30dp" />
+                    android:layout_marginLeft="110dp" />
 
                 <TextView
                     android:id="@+id/l_friwayat_detail_longitude_label"
@@ -173,19 +192,19 @@
                     android:layout_below="@+id/l_friwayat_detail_latitude"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginLeft="30dp" />
+                    android:layout_marginLeft="80dp" />
 
                 <TextView
                     android:id="@+id/l_friwayat_detail_longitude"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="-123456789012345678"
+                    android:text="-110.41247575"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimaryText"
                     android:layout_below="@+id/l_friwayat_detail_longitude_label"
                     android:layout_marginRight="16dp"
-                    android:layout_marginLeft="30dp" />
+                    android:layout_marginLeft="110dp" />
 
                 <View
                     android:id="@+id/l_friwayat_detail_line_geolocation"
@@ -217,8 +236,8 @@
                     android:id="@+id/l_friwayat_detail_keterangan"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Stand alone, but never alone."
-                    android:textSize="13sp"
+                    android:text="Tidak ada keterangan."
+                    android:textSize="14sp"
                     android:textColor="@color/colorPrimaryText"
                     android:layout_below="@+id/l_friwayat_detail_keterangan_label"
                     android:layout_marginTop="5dp"
@@ -226,16 +245,16 @@
                     android:layout_marginLeft="16dp" />
 
                 <TextView
-                    android:id="@+id/l_friwayat_detail_file"
+                    android:id="@+id/l_friwayat_detail_berkas"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="qjdocosdjocksdj.jpeg"
+                    android:text="sukses.png"
                     android:textSize="13sp"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimaryText"
                     android:gravity="center_horizontal"
                     android:layout_below="@+id/l_friwayat_detail_keterangan"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginLeft="16dp" />
 
@@ -244,21 +263,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
                     android:layout_marginTop="16dp"
-                    android:layout_below="@+id/l_friwayat_detail_file"
+                    android:layout_below="@+id/l_friwayat_detail_berkas"
                     android:background="@color/colorAbu" />
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
-
-<!--
-
-
-    <TextView
-        android:id="@+id/friwayat_detail_dokumen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="dokumen" />
-
-
- -->
-</LinearLayout>
+</RelativeLayout>

@@ -26,22 +26,24 @@
                 <TextView
                     android:id="@+id/l_fpengguna_pengguna_nama"
                     android:text="Mohon tunggu..."
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimaryText"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:layout_marginTop="90dp"
-                    android:layout_marginLeft="80dp" />
+                    android:layout_marginLeft="135dp"
+                    android:layout_marginRight="16dp" />
 
                 <TextView
                     android:id="@+id/l_fpengguna_pengguna_nip"
                     android:text="Mohon tunggu..."
-                    android:textSize="24sp"
+                    android:textSize="18sp"
                     android:textColor="@color/colorPrimaryText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/l_fpengguna_pengguna_nama"
+                    android:layout_marginRight="16dp"
                     android:layout_alignLeft="@+id/l_fpengguna_pengguna_nama" />
 
                 <View
@@ -50,7 +52,7 @@
                     android:layout_height="1dip"
                     android:layout_below="@+id/l_fpengguna_pengguna_foto"
                     android:layout_marginTop="16dp"
-                    android:background="@color/colorAbuTua" />
+                    android:background="@color/colorAbu" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -103,7 +105,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/colorAbuTua" />
+                    android:layout_marginLeft="50dp"
+                    android:background="@color/colorAbu" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -112,14 +115,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/l_fpengguna_lahir"
                 android:background="@color/colorPutih">
-                <View
-                    android:id="@+id/l_fpengguna_pengguna_line"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/colorAbuTua" />
                 <TextView
                     android:id="@+id/l_fpengguna_jkelamin_label"
                     android:layout_width="110dp"
@@ -165,7 +160,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/colorAbuTua" />
+                    android:background="@color/colorAbu" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -174,7 +169,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/l_fpengguna_jkelamin"
                 android:background="@color/colorPutih"
-                android:layout_marginTop="10dp" >
+                android:layout_marginTop="15dp" >
                 <TextView
                     android:id="@+id/l_fpengguna_golongan_label"
                     android:layout_width="110dp"
@@ -220,7 +215,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/colorAbuTua" />
+                    android:background="@color/colorAbu" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -229,7 +224,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/l_fpengguna_golongan"
                 android:background="@color/colorPutih"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="15dp">
                 <TextView
                     android:id="@+id/l_fpengguna_fakultas_label"
                     android:layout_width="110dp"
@@ -276,7 +271,7 @@
                     android:layout_height="1dp"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="0dp"
-                    android:background="@color/colorAbuTua" />
+                    android:background="@color/colorAbu" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -285,7 +280,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/l_fpengguna_fakultas"
                 android:background="@color/colorPutih"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="15dp">
                 <TextView
                     android:id="@+id/l_fpengguna_email_label"
                     android:layout_width="110dp"
@@ -331,11 +326,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/colorAbuTua" />
+                    android:background="@color/colorAbu" />
             </RelativeLayout>
-
-
-
 
             <RelativeLayout
                 android:id="@+id/l_fpengguna_keluar"
@@ -343,14 +335,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/l_fpengguna_email"
                 android:background="@color/colorPutih"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="15dp">
                 <Button
                     android:id="@+id/l_fpengguna_keluar_b"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
                     android:text="Keluar"
                     android:textSize="12sp"
                     android:textColor="@color/colorMerah"
@@ -361,7 +353,7 @@
                     android:id="@+id/l_fpengguna_keluar_line"
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
-                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
                     android:background="@color/colorAbuTua" />
             </RelativeLayout>
         </RelativeLayout>

@@ -100,7 +100,6 @@ public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor>
         mMasuk.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 attemptLogin();
-                masuk_coba(mUsernameView.getText().toString(), mPasswordView.getText().toString());
             }
         });
 
@@ -125,10 +124,10 @@ public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor>
                             startActivity(intent);
                             finish();
                         } else {
-                            Toast.makeText(getApplicationContext(), "Akun tidak ditemukan.", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplication().getApplicationContext(), AMasuk.class);
-                            startActivity(intent);
-                            finish();
+                            mAuthTask = null;
+                            showProgress(false);
+                            mPasswordView.setError(getString(R.string.error_incorrect_password));
+                            mPasswordView.requestFocus();
                         }
                     } catch (Exception e) {
                         Toast.makeText(getApplicationContext(), "Response gagal.", Toast.LENGTH_SHORT).show();
@@ -228,20 +227,22 @@ public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor>
             focusView = mUsernameView;
             cancel = true;
         } else if (!isUsernameValid(username)) {
+            mUsernameView.setError("Nomer Induk Pegawai ini tidak valid");
             focusView = mUsernameView;
             cancel = true;
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
+            //There was an error; don't attempt login and focus the first
+            //form field with an error.
             focusView.requestFocus();
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(username, password);
-            mAuthTask.execute((Void) null);
+            //mAuthTask = new UserLoginTask(username, password);
+            //mAuthTask.execute((Void) null);
+            masuk_coba(mUsernameView.getText().toString(), mPasswordView.getText().toString());
         }
     }
 
@@ -284,8 +285,8 @@ public class AMasuk extends AppCompatActivity implements LoaderCallbacks<Cursor>
                 }
             });
         } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
+            //The ViewPropertyAnimator APIs are not available, so simply show
+            //and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }

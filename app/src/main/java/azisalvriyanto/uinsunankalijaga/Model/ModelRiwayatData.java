@@ -7,6 +7,9 @@ public class ModelRiwayatData {
     @SerializedName("id")
     @Expose
     private String id;
+    @SerializedName("nip")
+    @Expose
+    private String nip;
     @SerializedName("jenis")
     @Expose
     private String jenis;
@@ -37,6 +40,13 @@ public class ModelRiwayatData {
     }
     public void setID(String id) {
         this.id = id;
+    }
+
+    public String getNIP() {
+        return nip;
+    }
+    public void setNIP(String nip) {
+        this.nip = nip;
     }
 
     public String getJenis() {

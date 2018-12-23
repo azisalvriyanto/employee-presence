@@ -4,7 +4,8 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:paddingTop="15dip"
-    android:clickable="true" >
+    android:clickable="true"
+    android:focusable="true" >
 
         <ImageView
             android:id="@+id/l_friwayat_status_img"
@@ -23,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_alignWithParentIfMissing="true"
             android:gravity="center_vertical"
-            android:text="Mohon tunggu..."
+            android:text="Riwayat presensi belum ada."
             android:textSize="18sp"
             android:paddingLeft="5dp"
             android:textColor="@color/colorPrimaryText"
@@ -39,7 +40,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
             android:singleLine="true"
-            android:text="Mohon tunggu..."
+            android:text=""
             android:textSize="12sp"
             android:paddingLeft="5dp"
             android:textColor="@color/colorSecondaryText"
@@ -54,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Mohon tunggu..."
+            android:text=""
             android:textSize="10sp"
             android:textColor="@color/colorSecondaryText"
             android:layout_alignRight="@+id/l_friwayat_status"
@@ -65,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Mohon tunggu..."
+            android:text=""
             android:textSize="10sp"
             android:textColor="@color/colorSecondaryText"
             android:layout_below="@+id/l_friwayat_waktu"

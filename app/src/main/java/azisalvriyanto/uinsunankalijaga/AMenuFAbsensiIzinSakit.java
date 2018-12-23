@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,14 +28,17 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import azisalvriyanto.uinsunankalijaga.Api.ApiClient;
 import azisalvriyanto.uinsunankalijaga.Api.ApiService;
 import azisalvriyanto.uinsunankalijaga.Model.ModelPengguna;
+import azisalvriyanto.uinsunankalijaga.Model.ModelRiwayatTambah;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,6 +49,11 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
     int REQUEST_CODE_DOC = 1;
     double latitude, longitude;
     Button file_pilih;
+    File file;
+
+    //retrofit
+    final Retrofit apiClient = ApiClient.getClient();
+    final ApiService apiService = apiClient.create(ApiService.class);
 
     public AMenuFAbsensiIzinSakit() {
         // Required empty public constructor
@@ -53,9 +62,8 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.l_menu_fabsensi_izinsakit, container, false);
+        final View view = inflater.inflate(R.layout.l_menu_fabsensi_izinsakit, container, false);
         final String username = SaveSharedPreference.getNIP(getActivity());
-
 
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Mohon tunggu...");
@@ -68,10 +76,6 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
         final TextView tv_nip         = view.findViewById(R.id.l_fabsensi_izinsakit_pengguna_nip);
         final TextView tv_nama        = view.findViewById(R.id.l_fabsensi_izinsakit_pengguna_nama);
         final ImageView iv_fotop      = view.findViewById(R.id.l_fabsensi_izinsakit_pengguna_foto);
-
-        //retrofit
-        final Retrofit apiClient = ApiClient.getClient();
-        final ApiService apiService = apiClient.create(ApiService.class);
 
         Call<ModelPengguna> call = apiService.pengguna(username);
         call.enqueue(new Callback<ModelPengguna>() {
@@ -153,9 +157,12 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
         tv_latitude.setText(latitude+"");
         tv_longitude.setText(longitude+"");
 
+        final String asw = latitude+"";
+        final String kunyuk = longitude+"";
+
         //Spinner Jenis
         Spinner jenis = view.findViewById(R.id.l_fabsensi_izinsakit_jenis_pilih);
-        String[] jenis_array = { "Sakit", "Izin" };
+        String[] jenis_array = { "Pilih salah satu jenis absensi.", "Sakit", "Izin" };
 
         ArrayAdapter adapter = new ArrayAdapter(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, jenis_array);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -163,7 +170,8 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
         String jenis_s = jenis.getSelectedItem().toString();
 
         String[] mimeTypes = {
-                "application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                "application/msword",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                 "application/pdf"
         };
 
@@ -201,18 +209,57 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
                 progressDialog.setCancelable(false);
                 progressDialog.show();
 
-                final Timer t = new Timer();
-                t.schedule(new TimerTask() {
-                    public void run() {
-                        progressDialog.dismiss();
-                    }
-                }, 2000);
-
                 Calendar kalender                   = Calendar.getInstance();
                 SimpleDateFormat tanggal_format     = new SimpleDateFormat("dd/MM/yyy");
                 SimpleDateFormat waktu_format       = new SimpleDateFormat("HH:MM:ss");
                 final String tanggal                = tanggal_format.format(kalender.getTime());
                 final String waktu                  = waktu_format.format(kalender.getTime());
+
+                //RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+                RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+                MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("berkas", file.getName(), requestBody);
+
+                EditText tv_keterangan = view.findViewById(R.id.l_fabsensi_izinsakit_keterangan_keterangan);
+                String keterangan = tv_keterangan.getText().toString();
+
+                Call<ModelRiwayatTambah> call = apiService.absensi("izin", username, tanggal, waktu, asw, kunyuk, multipartBody, requestBody, keterangan);
+                call.enqueue(new Callback<ModelRiwayatTambah>() {
+                    @Override
+                    public void onResponse(Call<ModelRiwayatTambah> call, Response<ModelRiwayatTambah> response) {
+                        if (response.isSuccessful()) {
+                            try {
+                                if (response.body().getStatus().equals("sukses")) {
+                                    Toast.makeText(getActivity().getApplicationContext(), "SUKSES.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getActivity().getApplicationContext(), response.body().getPesan()+" | Akun tidak ditemukan.", Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                Toast.makeText(getActivity().getApplicationContext(), "Response gagal.", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(getActivity().getApplicationContext(), "Credentials are not valid.", Toast.LENGTH_SHORT).show();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelRiwayatTambah> call, Throwable t) {
+                        Log.e("TAG", "=======onFailure: " + t.toString());
+                        t.printStackTrace();
+                        progressDialog.dismiss();
+                    }
+                });
+
+
+
+
+
+
+
+
+
+
 
             }
         });
@@ -222,11 +269,18 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
 
     @Override
     public void onActivityResult(int requestcode, int resultcode, Intent data){
-        super.onActivityResult(REQUEST_CODE_DOC, resultcode, data);
-        Uri uri = data.getData();
-        String uriString = uri.toString();
-        File myFile = new File(uriString);
-        String path = myFile.getAbsolutePath();
-        file_pilih.setText(path);
+        super.onActivityResult(resultcode, resultcode, data);
+        Uri uri             = data.getData();
+        String uriString    = uri.toString();
+        //File file           = new File(uriString);
+        File file           = new File("/storage/0403-0201/aaUNDUHAN/cetak166500365b61b23d1595b.pdf");
+        String filePath     = file.getAbsolutePath();
+        try {
+            filePath = file.getCanonicalPath();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        file_pilih.setText(filePath);
     }
 }

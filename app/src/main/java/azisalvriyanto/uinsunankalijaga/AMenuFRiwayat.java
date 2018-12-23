@@ -1,16 +1,13 @@
 package azisalvriyanto.uinsunankalijaga;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -58,32 +55,14 @@ public class AMenuFRiwayat extends Fragment {
             @Override
             public void onResponse(Call<ModelRiwayat> call, Response<ModelRiwayat> response) {
                 if (response.isSuccessful()) {
-                    //Dismiss Dialog
                     progressDialog.dismiss();
 
                     data = response.body().getData();
-                    recyclerView = (RecyclerView) view.findViewById(R.id.friwayat_layout);
+                    recyclerView = view.findViewById(R.id.friwayat_layout);
                     adapterRiwayat = new AdapterRiwayat(data);
                     RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
                     recyclerView.setLayoutManager(eLayoutManager);
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
-                    /*recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), recyclerView, new ClickListener() {
-                        @Override
-                        public void onClick(View view, final int position) {
-                            //Values are passing to activity & to fragment as well
-                            Toast.makeText(getActivity().getApplicationContext(), data.getClass().getName()[position]"Single Click on position: "+position,
-                                    Toast.LENGTH_SHORT).show();
-                            //BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(position);
-                            //bottomSheetDialog.show(getActivity(), bottomSheetDialog.getClass());
-
-                        }
-
-                        @Override
-                        public void onLongClick(View view, int position) {
-                            Toast.makeText(getActivity().getApplicationContext(), "Long press on position: "+position,
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    }));*/
                     recyclerView.setAdapter(adapterRiwayat);
                 }
                 else {
@@ -101,63 +80,4 @@ public class AMenuFRiwayat extends Fragment {
 
         return view;
     }
-
-
-
-
-
-    public static interface ClickListener{
-        public void onClick(View view,int position);
-        public void onLongClick(View view,int position);
-    }
-
-    class RecyclerTouchListener implements RecyclerView.OnItemTouchListener{
-
-        private ClickListener clicklistener;
-        private GestureDetector gestureDetector;
-
-        public RecyclerTouchListener(Context context, final RecyclerView recycleView, final ClickListener clicklistener){
-
-            this.clicklistener=clicklistener;
-            gestureDetector=new GestureDetector(context,new GestureDetector.SimpleOnGestureListener(){
-                @Override
-                public boolean onSingleTapUp(MotionEvent e) {
-                    return true;
-                }
-
-                @Override
-                public void onLongPress(MotionEvent e) {
-                    View child=recycleView.findChildViewUnder(e.getX(),e.getY());
-                    if(child!=null && clicklistener!=null){
-                        clicklistener.onLongClick(child,recycleView.getChildAdapterPosition(child));
-                    }
-                }
-            });
-        }
-
-        @Override
-        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-            View child=rv.findChildViewUnder(e.getX(),e.getY());
-            if(child!=null && clicklistener!=null && gestureDetector.onTouchEvent(e)){
-                clicklistener.onClick(child,rv.getChildAdapterPosition(child));
-            }
-
-            return false;
-        }
-
-        @Override
-        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-        }
-
-        @Override
-        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-        }
-    }
-
-
-
-
-
 }

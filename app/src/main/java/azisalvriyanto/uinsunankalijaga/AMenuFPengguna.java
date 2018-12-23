@@ -27,6 +27,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
+import static org.apache.commons.lang3.StringUtils.capitalize;
 
 public class AMenuFPengguna extends Fragment {
     Button b_keluar, b_perbaharui;
@@ -93,10 +94,10 @@ public class AMenuFPengguna extends Fragment {
                             data_nip_tv.setText(data_nip);
                             data_nama_tv.setText(data_nama);
                             data_lahir_tv.setText(data_lahirtempat+", "+data_lahirtanggal);
-                            data_jkelamin_tv.setText(data_jkelamin);
+                            data_jkelamin_tv.setText(capitalize(data_jkelamin));
                             data_fakultas_tv.setText(data_fakultas);
                             data_golongan_tv.setText(data_golongan);
-                            data_email_tv.setText(data_email);
+                            data_email_tv.setText(data_email.toLowerCase());
                         } else {
                             Toast.makeText(getActivity().getApplicationContext(), "Akun tidak ditemukan.", Toast.LENGTH_SHORT).show();
                         }
