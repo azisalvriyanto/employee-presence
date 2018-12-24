@@ -26,7 +26,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -43,16 +42,21 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static android.app.Activity.RESULT_OK;
+
 
 public class AMenuFAbsensiIzinSakit extends Fragment {
     int REQUEST_CODE_DOC = 1;
     String latitude, longitude;
     Button file_pilih;
+    private static final int requestcode = 1;
     File file;
 
     //retrofit
     final Retrofit apiClient = ApiClient.getClient();
     final ApiService apiService = apiClient.create(ApiService.class);
+
+    public static Context contextOfApplication;
 
     public AMenuFAbsensiIzinSakit() {
         // Required empty public constructor
@@ -174,55 +178,51 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
         b_kirim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            progressDialog.setMessage("Mohon tunggu...");
-            progressDialog.setIndeterminate(false);
-            progressDialog.setCancelable(false);
-            progressDialog.show();
+                progressDialog.setMessage("Mohon tunggu...");
+                progressDialog.setIndeterminate(false);
+                progressDialog.setCancelable(false);
+                progressDialog.show();
 
-            Calendar kalender                   = Calendar.getInstance();
-            SimpleDateFormat tanggal_format     = new SimpleDateFormat("dd/MM/yyy");
-            SimpleDateFormat waktu_format       = new SimpleDateFormat("HH:MM:ss");
-            final String tanggal                = tanggal_format.format(kalender.getTime());
-            final String waktu                  = waktu_format.format(kalender.getTime());
+                Calendar kalender                   = Calendar.getInstance();
+                SimpleDateFormat tanggal_format     = new SimpleDateFormat("dd/MM/yyy");
+                SimpleDateFormat waktu_format       = new SimpleDateFormat("HH:MM:ss");
+                final String tanggal                = tanggal_format.format(kalender.getTime());
+                final String waktu                  = waktu_format.format(kalender.getTime());
 
-            /*File kontol = new File("/storage/0403-0201/aaUNDUHAN/cetak166500365b61b23d1595b.pdf");
-            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), kontol);
-            MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("berkas", kontol.getName(), requestBody);*/
+                RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+                MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("berkas", file.getName(), requestBody);
 
-            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-            MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("berkas", file.getName(), requestBody);
+                EditText tv_keterangan = view.findViewById(R.id.l_fabsensi_izinsakit_keterangan_keterangan);
+                String keterangan = tv_keterangan.getText().toString();
 
-            EditText tv_keterangan = view.findViewById(R.id.l_fabsensi_izinsakit_keterangan_keterangan);
-            String keterangan = tv_keterangan.getText().toString();
-
-            Call<ModelRiwayatTambah> call = apiService.absensi("izin", username, tanggal, waktu, latitude, longitude, multipartBody, requestBody, keterangan);
-            call.enqueue(new Callback<ModelRiwayatTambah>() {
-                @Override
-                public void onResponse(Call<ModelRiwayatTambah> call, Response<ModelRiwayatTambah> response) {
-                    if (response.isSuccessful()) {
-                        try {
-                            if (response.body().getStatus().equals("sukses")) {
-                                Toast.makeText(getActivity().getApplicationContext(), "SUKSES.", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(getActivity().getApplicationContext(), response.body().getPesan()+" | Akun tidak ditemukan.", Toast.LENGTH_SHORT).show();
+                Call<ModelRiwayatTambah> call = apiService.absensi("izin", username, tanggal, waktu, latitude, longitude, multipartBody, requestBody, keterangan);
+                call.enqueue(new Callback<ModelRiwayatTambah>() {
+                    @Override
+                    public void onResponse(Call<ModelRiwayatTambah> call, Response<ModelRiwayatTambah> response) {
+                        if (response.isSuccessful()) {
+                            try {
+                                if (response.body().getStatus().equals("sukses")) {
+                                    Toast.makeText(getActivity().getApplicationContext(), "Absensi telah diajukan.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getActivity().getApplicationContext(), "Akun tidak ditemukan.", Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                Toast.makeText(getActivity().getApplicationContext(), "Response gagal.", Toast.LENGTH_SHORT).show();
                             }
-                        } catch (Exception e) {
-                            Toast.makeText(getActivity().getApplicationContext(), "Response gagal.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getActivity().getApplicationContext(), "Credentials are not valid.", Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        Toast.makeText(getActivity().getApplicationContext(), "Credentials are not valid.", Toast.LENGTH_SHORT).show();
+
+                        progressDialog.dismiss();
                     }
 
-                    progressDialog.dismiss();
-                }
-
-                @Override
-                public void onFailure(Call<ModelRiwayatTambah> call, Throwable t) {
-                    Log.e("TAG", "=======onFailure: " + t.toString());
-                    t.printStackTrace();
-                    progressDialog.dismiss();
-                }
-            });
+                    @Override
+                    public void onFailure(Call<ModelRiwayatTambah> call, Throwable t) {
+                        Log.e("TAG", "=======onFailure: " + t.toString());
+                        t.printStackTrace();
+                        progressDialog.dismiss();
+                    }
+                });
             }
         });
 
@@ -232,17 +232,19 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
     @Override
     public void onActivityResult(int requestcode, int resultcode, Intent data){
         super.onActivityResult(resultcode, resultcode, data);
-        Uri uri             = data.getData();
-        String uriString    = uri.toString();
-        //File file           = new File(uriString);
-        File file           = new File("/storage/0403-0201/aaUNDUHAN/cetak166500365b61b23d1595b.pdf");
-        String filePath     = file.getAbsolutePath();
-        try {
-            filePath = file.getCanonicalPath();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        if (this.requestcode == requestcode && resultcode == RESULT_OK){
+            Uri uri             = data.getData();
+            String filePath     = uri.getPath();
+            //file                = new File("/storage/0403-0201/aaUNDUHAN/cetak166500365b61b23d1595b.pdf");
+            file                = new File(filePath);
+            file_pilih.setText(filePath);
 
-        file_pilih.setText(filePath);
+            /*Uri uri = data.getData();
+            String mimeType = getActivity().getContentResolver().getType(uri);
+            Cursor returnCursor = getActivity().getContentResolver().query(uri, null, null, null, null);
+            int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+            returnCursor.moveToLast();
+            file_pilih.setText(returnCursor.getString(nameIndex));*/
+        }
     }
 }
