@@ -26,7 +26,7 @@
             android:id="@+id/l_friwayat_tanggal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="50dp"
+            android:layout_marginRight="53dp"
             android:text="Mohon tunggu..."
             android:textColor="@color/colorSecondaryText"
             android:timeZone="GMT+0700"

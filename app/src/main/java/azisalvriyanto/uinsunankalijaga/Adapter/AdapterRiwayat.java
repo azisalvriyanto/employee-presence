@@ -4,17 +4,29 @@ import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import azisalvriyanto.uinsunankalijaga.Api.ApiClient;
+import azisalvriyanto.uinsunankalijaga.Api.ApiService;
 import azisalvriyanto.uinsunankalijaga.Model.ModelRiwayatData;
+import azisalvriyanto.uinsunankalijaga.Model.ModelRiwayatDetail;
+import azisalvriyanto.uinsunankalijaga.Model.ModelRiwayatDetailData;
 import azisalvriyanto.uinsunankalijaga.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
@@ -50,7 +62,7 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.CustomVi
         }
         else {
             if ("sedang".equals(riwayat.getStatus())) {
-                status = riwayat.getStatus()+" diproses.";
+                status = "Sedang diproses.";
                 status_gambar = holder.itemView.getResources().getDrawable(R.mipmap.ic_sedang);
             }
             else if ("sukses".equals(riwayat.getStatus())) {
@@ -81,40 +93,75 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.CustomVi
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(view.getContext());
                 bottomSheetDialog.setContentView(contentView);
 
-                TextView a_friwayat_detail_jenis        = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_jenis);
-                TextView a_friwayat_detail_status       = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_status);
-                TextView a_friwayat_detail_waktu        = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_waktu);
-                //ImageView a_friwayat_detail_foto         = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_foto);
-                TextView a_friwayat_detail_nama         = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_nama);
-                TextView a_friwayat_detail_nip          = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_nip);
-                TextView a_friwayat_detail_tanggal      = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_tanggal);
-                TextView a_friwayat_detail_latitude     = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_latitude);
-                TextView a_friwayat_detail_longitude    = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_longitude);
-                TextView l_friwayat_detail_keterangan   = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_keterangan);
-                TextView l_friwayat_detail_berkas       = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_berkas);
+                final TextView a_friwayat_detail_jenis        = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_jenis);
+                final TextView a_friwayat_detail_status       = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_status);
+                final TextView a_friwayat_detail_waktu        = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_waktu);
+                final ImageView a_friwayat_detail_foto        = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_foto);
+                final TextView a_friwayat_detail_nama         = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_nama);
+                final TextView a_friwayat_detail_nip          = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_nip);
+                final TextView a_friwayat_detail_tanggal      = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_tanggal);
+                final TextView a_friwayat_detail_latitude     = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_latitude);
+                final TextView a_friwayat_detail_longitude    = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_longitude);
+                final TextView l_friwayat_detail_keterangan   = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_keterangan);
+                final TextView l_friwayat_detail_berkas       = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_berkas);
 
-                a_friwayat_detail_jenis.setText(capitalize(riwayat.getJenis()));
-                a_friwayat_detail_status.setText(status);
-                a_friwayat_detail_waktu.setText(riwayat.getWaktu());
-                a_friwayat_detail_tanggal.setText(riwayat.getTanggal());
-                a_friwayat_detail_nama.setText(riwayat.getID());
-                a_friwayat_detail_nip.setText(riwayat.getID());
-                a_friwayat_detail_latitude.setText(riwayat.getLatitude());
-                a_friwayat_detail_longitude.setText(riwayat.getLongitude());
-                l_friwayat_detail_keterangan.setText(riwayat.getKeterangan());
-                l_friwayat_detail_berkas.setText(riwayat.getBerkas());
+                //retrofit
+                final Retrofit apiClient = ApiClient.getClient();
+                final ApiService apiService = apiClient.create(ApiService.class);
 
-                //String data_foto_url = "http://presensi-pegawai.msftrailers.co.za/foto/"+riwayat.getFoto();
-                //loadImageFromUrl(data_foto_url, a_friwayat_detail_foto);
+                Call<ModelRiwayatDetail> call = apiService.riwayat_detail(riwayat.getID());
+                call.enqueue(new Callback<ModelRiwayatDetail>() {
+                    @Override
+                    public void onResponse(Call<ModelRiwayatDetail> call, Response<ModelRiwayatDetail> response) {
+                        if (response.isSuccessful()) {
+                            try {
+                                if (response.body().getStatus().equals("sukses")) {
+                                    ModelRiwayatDetailData data = response.body().getData();
+                                    String keterangan;
+                                    Glide.with(holder.itemView)
+                                        .asBitmap()
+                                        .load("http://presensi-pegawai.msftrailers.co.za/foto/"+data.getFoto())
+                                        .into(a_friwayat_detail_foto);
+
+
+                                    if (data.getKeterangan() != null && data.getKeterangan().isEmpty()) {
+                                        keterangan = "Keterangan tidak ada.";
+                                    }
+                                    else {
+                                        keterangan = data.getKeterangan();
+                                    }
+
+                                    a_friwayat_detail_jenis.setText(capitalize(data.getJenis()));
+                                    a_friwayat_detail_status.setText(status);
+                                    a_friwayat_detail_waktu.setText(data.getWaktu());
+                                    a_friwayat_detail_tanggal.setText(data.getTanggal());
+                                    a_friwayat_detail_nama.setText(data.getNama());
+                                    a_friwayat_detail_nip.setText(data.getNIP());
+                                    a_friwayat_detail_latitude.setText(data.getLatitude());
+                                    a_friwayat_detail_longitude.setText(data.getLongitude());
+                                    l_friwayat_detail_keterangan.setText(capitalize(keterangan));
+                                    l_friwayat_detail_berkas.setText(data.getBerkas());
+                                } else {
+                                    Toast.makeText(holder.itemView.getContext(), "Detail riwayat tidak ditemukan.", Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                Toast.makeText(holder.itemView.getContext(), "Response gagal.", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(holder.itemView.getContext(), "Credentials are not valid.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelRiwayatDetail> call, Throwable t) {
+                        Log.e("TAG", "=======onFailure: " + t.toString());
+                        t.printStackTrace();
+                    }
+                });
 
                 bottomSheetDialog.show();
             }
         });
-
-        /*Glide.with(holder.itemView)
-            //.asBitmap()
-            .load(url)
-            .into(holder.a_friwyat_status_gambar);*/
     }
 
     @Override

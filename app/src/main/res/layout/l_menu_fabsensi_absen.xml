@@ -158,7 +158,7 @@
                     android:layout_below="@+id/l_friwayat_absen_geolocation_label"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginLeft="30dp" />
+                    android:layout_marginLeft="80dp" />
 
                 <TextView
                     android:id="@+id/l_friwayat_absen_geolocation_latitude"
@@ -170,7 +170,7 @@
                     android:textColor="@color/colorPrimaryText"
                     android:layout_below="@+id/l_friwayat_absen_geolocation_latitude_label"
                     android:layout_marginRight="16dp"
-                    android:layout_marginLeft="30dp" />
+                    android:layout_marginLeft="110dp" />
 
                 <TextView
                     android:id="@+id/l_friwayat_absen_geolocation_longitude_label"
@@ -182,7 +182,7 @@
                     android:layout_below="@+id/l_friwayat_absen_geolocation_latitude"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginLeft="30dp" />
+                    android:layout_marginLeft="80dp" />
 
                 <TextView
                     android:id="@+id/l_friwayat_absen_geolocation_longitude"
@@ -194,7 +194,7 @@
                     android:textColor="@color/colorPrimaryText"
                     android:layout_below="@+id/l_friwayat_absen_geolocation_longitude_label"
                     android:layout_marginRight="16dp"
-                    android:layout_marginLeft="30dp" />
+                    android:layout_marginLeft="110dp" />
 
                 <View
                     android:id="@+id/l_friwayat_absen_geolocation_line"
@@ -211,8 +211,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/button"
+                android:text="Kirim"
                 android:textColor="#FFFFFF"
-                android:text="KIRIM"
+                android:textAllCaps="false"
                 android:layout_below="@+id/l_friwayat_absen_geolocation" />
 
         </RelativeLayout>

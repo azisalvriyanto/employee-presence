@@ -9,7 +9,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -17,7 +16,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,6 +33,7 @@ import java.util.Calendar;
 import azisalvriyanto.uinsunankalijaga.Api.ApiClient;
 import azisalvriyanto.uinsunankalijaga.Api.ApiService;
 import azisalvriyanto.uinsunankalijaga.Model.ModelPengguna;
+import azisalvriyanto.uinsunankalijaga.Model.ModelPenggunaData;
 import azisalvriyanto.uinsunankalijaga.Model.ModelRiwayatTambah;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -47,7 +46,7 @@ import retrofit2.Retrofit;
 
 public class AMenuFAbsensiIzinSakit extends Fragment {
     int REQUEST_CODE_DOC = 1;
-    double latitude, longitude;
+    String latitude, longitude;
     Button file_pilih;
     File file;
 
@@ -84,17 +83,14 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
                 if (response.isSuccessful()) {
                     try {
                         if (response.body().getStatus().equals("sukses")) {
-                            ModelPengguna data = response.body();
+                            ModelPenggunaData data = response.body().getData();
 
-                            String data_foto = data.getData().getFoto();
-                            String data_foto_url = "http://presensi-pegawai.msftrailers.co.za/foto/"+data_foto;
-                            loadImageFromUrl(data_foto_url, iv_fotop);
-
-                            String data_nip = data.getData().getNIP();
-                            String data_nama = data.getData().getNama();
-
-                            tv_nip.setText(data_nip);
-                            tv_nama.setText(data_nama);
+                            Glide.with(getActivity().getApplicationContext())
+                                .asBitmap()
+                                .load("http://presensi-pegawai.msftrailers.co.za/foto/"+data.getFoto())
+                                .into(iv_fotop);
+                            tv_nip.setText(data.getNIP());
+                            tv_nama.setText(data.getNama());
                         } else {
                             Toast.makeText(getActivity().getApplicationContext(), response.body().getStatus()+"Akun tidak ditemukan.", Toast.LENGTH_SHORT).show();
                         }
@@ -108,13 +104,6 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
                 }
             }
 
-            private void loadImageFromUrl(String imageUrl, ImageView image){
-                Glide.with(getActivity().getApplicationContext())
-                        .asBitmap()
-                        .load(imageUrl)
-                        .into(image);
-            }
-
             @Override
             public void onFailure(Call<ModelPengguna> call, Throwable t) {
                 Log.e("TAG", "=======onFailure: " + t.toString());
@@ -122,17 +111,24 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
                 progressDialog.dismiss();
             }
         });
+        
+        //Spinner Jenis
+        Spinner s_jenis = view.findViewById(R.id.l_fabsensi_izinsakit_jenis_pilih);
+        //String[] jenis_array = { "Pilih salah satu jenis absensi.", "Sakit", "Izin" };
+        /*ArrayAdapter adapter = new ArrayAdapter(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, jenis_array);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        jenis.setAdapter(adapter);*/
 
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            latitude    = location.getLatitude();
-            longitude   = location.getLongitude();
+            latitude    = location.getLatitude()+"";
+            longitude   = location.getLongitude()+"";
 
             final LocationListener locationListener = new LocationListener() {
                 public void onLocationChanged(Location location) {
-                    latitude    = location.getLatitude();
-                    longitude   = location.getLongitude();
+                    latitude    = location.getLatitude()+"";
+                    longitude   = location.getLongitude()+"";
                 }
 
                 @Override
@@ -153,44 +149,18 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
 
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
         }
+        tv_latitude.setText(latitude);
+        tv_longitude.setText(longitude);
 
-        tv_latitude.setText(latitude+"");
-        tv_longitude.setText(longitude+"");
-
-        final String asw = latitude+"";
-        final String kunyuk = longitude+"";
-
-        //Spinner Jenis
-        Spinner jenis = view.findViewById(R.id.l_fabsensi_izinsakit_jenis_pilih);
-        String[] jenis_array = { "Pilih salah satu jenis absensi.", "Sakit", "Izin" };
-
-        ArrayAdapter adapter = new ArrayAdapter(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, jenis_array);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        jenis.setAdapter(adapter);
-        String jenis_s = jenis.getSelectedItem().toString();
-
-        String[] mimeTypes = {
-                "application/msword",
+        final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        String[] mimetypes = {
                 "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                "application/msword",
                 "application/pdf"
         };
-
-        final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            intent.setType(mimeTypes.length == 1 ? mimeTypes[0] : "*/*");
-            if (mimeTypes.length > 0) {
-                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-            }
-        } else {
-            String mimeTypesStr = "";
-            for (String mimeType : mimeTypes) {
-                mimeTypesStr += mimeType + "|";
-            }
-            intent.setType(mimeTypesStr.substring(0,mimeTypesStr.length() - 1));
-        }
-
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
 
         file_pilih = view.findViewById(R.id.l_fabsensi_izinsakit_keterangan_berkas);
         file_pilih.setOnClickListener(new View.OnClickListener() {
@@ -204,63 +174,55 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
         b_kirim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog.setMessage("Mohon tunggu...");
-                progressDialog.setIndeterminate(false);
-                progressDialog.setCancelable(false);
-                progressDialog.show();
+            progressDialog.setMessage("Mohon tunggu...");
+            progressDialog.setIndeterminate(false);
+            progressDialog.setCancelable(false);
+            progressDialog.show();
 
-                Calendar kalender                   = Calendar.getInstance();
-                SimpleDateFormat tanggal_format     = new SimpleDateFormat("dd/MM/yyy");
-                SimpleDateFormat waktu_format       = new SimpleDateFormat("HH:MM:ss");
-                final String tanggal                = tanggal_format.format(kalender.getTime());
-                final String waktu                  = waktu_format.format(kalender.getTime());
+            Calendar kalender                   = Calendar.getInstance();
+            SimpleDateFormat tanggal_format     = new SimpleDateFormat("dd/MM/yyy");
+            SimpleDateFormat waktu_format       = new SimpleDateFormat("HH:MM:ss");
+            final String tanggal                = tanggal_format.format(kalender.getTime());
+            final String waktu                  = waktu_format.format(kalender.getTime());
 
-                //RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-                RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-                MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("berkas", file.getName(), requestBody);
+            /*File kontol = new File("/storage/0403-0201/aaUNDUHAN/cetak166500365b61b23d1595b.pdf");
+            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), kontol);
+            MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("berkas", kontol.getName(), requestBody);*/
 
-                EditText tv_keterangan = view.findViewById(R.id.l_fabsensi_izinsakit_keterangan_keterangan);
-                String keterangan = tv_keterangan.getText().toString();
+            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+            MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("berkas", file.getName(), requestBody);
 
-                Call<ModelRiwayatTambah> call = apiService.absensi("izin", username, tanggal, waktu, asw, kunyuk, multipartBody, requestBody, keterangan);
-                call.enqueue(new Callback<ModelRiwayatTambah>() {
-                    @Override
-                    public void onResponse(Call<ModelRiwayatTambah> call, Response<ModelRiwayatTambah> response) {
-                        if (response.isSuccessful()) {
-                            try {
-                                if (response.body().getStatus().equals("sukses")) {
-                                    Toast.makeText(getActivity().getApplicationContext(), "SUKSES.", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(getActivity().getApplicationContext(), response.body().getPesan()+" | Akun tidak ditemukan.", Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (Exception e) {
-                                Toast.makeText(getActivity().getApplicationContext(), "Response gagal.", Toast.LENGTH_SHORT).show();
+            EditText tv_keterangan = view.findViewById(R.id.l_fabsensi_izinsakit_keterangan_keterangan);
+            String keterangan = tv_keterangan.getText().toString();
+
+            Call<ModelRiwayatTambah> call = apiService.absensi("izin", username, tanggal, waktu, latitude, longitude, multipartBody, requestBody, keterangan);
+            call.enqueue(new Callback<ModelRiwayatTambah>() {
+                @Override
+                public void onResponse(Call<ModelRiwayatTambah> call, Response<ModelRiwayatTambah> response) {
+                    if (response.isSuccessful()) {
+                        try {
+                            if (response.body().getStatus().equals("sukses")) {
+                                Toast.makeText(getActivity().getApplicationContext(), "SUKSES.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getActivity().getApplicationContext(), response.body().getPesan()+" | Akun tidak ditemukan.", Toast.LENGTH_SHORT).show();
                             }
-                        } else {
-                            Toast.makeText(getActivity().getApplicationContext(), "Credentials are not valid.", Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            Toast.makeText(getActivity().getApplicationContext(), "Response gagal.", Toast.LENGTH_SHORT).show();
                         }
-
-                        progressDialog.dismiss();
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), "Credentials are not valid.", Toast.LENGTH_SHORT).show();
                     }
 
-                    @Override
-                    public void onFailure(Call<ModelRiwayatTambah> call, Throwable t) {
-                        Log.e("TAG", "=======onFailure: " + t.toString());
-                        t.printStackTrace();
-                        progressDialog.dismiss();
-                    }
-                });
+                    progressDialog.dismiss();
+                }
 
-
-
-
-
-
-
-
-
-
-
+                @Override
+                public void onFailure(Call<ModelRiwayatTambah> call, Throwable t) {
+                    Log.e("TAG", "=======onFailure: " + t.toString());
+                    t.printStackTrace();
+                    progressDialog.dismiss();
+                }
+            });
             }
         });
 

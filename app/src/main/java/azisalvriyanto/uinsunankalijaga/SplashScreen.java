@@ -14,7 +14,7 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_splash_screen);
+        setContentView(R.layout.l_spalshscreen);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -22,10 +22,7 @@ public class SplashScreen extends AppCompatActivity {
                 Intent intent = new Intent(SplashScreen.this, AMasuk.class);
                 startActivity(intent);
 
-                this.finish();
-            }
-
-            private void finish() {
+                finish();
             }
         }, splashInterval);
     }

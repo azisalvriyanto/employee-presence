@@ -9,7 +9,6 @@
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:src="@drawable/bg"
+        android:src="@drawable/splashscreen"
         android:scaleType="centerCrop"/>
-
 </RelativeLayout>

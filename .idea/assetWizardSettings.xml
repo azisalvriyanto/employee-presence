@@ -45,7 +45,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="ffffff" />
-                                                <entry key="paddingPercent" value="15" />
+                                                <entry key="paddingPercent" value="30" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -56,7 +56,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/notification/ic_sync_problem_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_done_all_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -88,10 +88,10 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundColor" value="ff4626" />
+                                      <entry key="backgroundColor" value="65b3ff" />
                                       <entry key="cropped" value="true" />
                                       <entry key="imageAsset" value="D:\AL-VRI\assets\assets1.png" />
-                                      <entry key="outputName" value="ic_gagal" />
+                                      <entry key="outputName" value="ic_sukses" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -7,9 +7,6 @@ public class ModelRiwayatData {
     @SerializedName("id")
     @Expose
     private String id;
-    @SerializedName("nip")
-    @Expose
-    private String nip;
     @SerializedName("jenis")
     @Expose
     private String jenis;
@@ -19,18 +16,6 @@ public class ModelRiwayatData {
     @SerializedName("waktu")
     @Expose
     private String waktu;
-    @SerializedName("latitude")
-    @Expose
-    private String latitude;
-    @SerializedName("longitude")
-    @Expose
-    private String longitude;
-    @SerializedName("keterangan")
-    @Expose
-    private String keterangan;
-    @SerializedName("berkas")
-    @Expose
-    private String berkas;
     @SerializedName("status")
     @Expose
     private String status;
@@ -40,13 +25,6 @@ public class ModelRiwayatData {
     }
     public void setID(String id) {
         this.id = id;
-    }
-
-    public String getNIP() {
-        return nip;
-    }
-    public void setNIP(String nip) {
-        this.nip = nip;
     }
 
     public String getJenis() {
@@ -68,34 +46,6 @@ public class ModelRiwayatData {
     }
     public void setWaktu(String waktu) {
         this.waktu = waktu;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
-
-    public String getKeterangan() {
-        return keterangan;
-    }
-    public void setKeterangan(String keterangan) {
-        this.keterangan = keterangan;
-    }
-
-    public String getBerkas() {
-        return berkas;
-    }
-    public void setBerkas(String berkas) {
-        this.berkas = berkas;
     }
 
     public String getStatus() {

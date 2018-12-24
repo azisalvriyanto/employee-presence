@@ -3,6 +3,7 @@ package azisalvriyanto.uinsunankalijaga.Api;
 import azisalvriyanto.uinsunankalijaga.Model.ModelMasuk;
 import azisalvriyanto.uinsunankalijaga.Model.ModelPengguna;
 import azisalvriyanto.uinsunankalijaga.Model.ModelRiwayat;
+import azisalvriyanto.uinsunankalijaga.Model.ModelRiwayatDetail;
 import azisalvriyanto.uinsunankalijaga.Model.ModelRiwayatTambah;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -32,7 +33,7 @@ public interface ApiService {
             @Query("latitude") String latitude,
             @Query("longitude") String longitude,
             @Part MultipartBody.Part berkasFile,
-            @Part("file") RequestBody berkasName,
+            @Part("berkas") RequestBody berkasName,
             @Query("keterangan") String keterangan
     );
     //@Part MultipartBody.Part berkas,
@@ -40,6 +41,10 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("riwayat.php")
     Call<ModelRiwayat> riwayat(@Field("nip") String username);
+
+    @FormUrlEncoded
+    @POST("riwayat_detail.php")
+    Call<ModelRiwayatDetail> riwayat_detail(@Field("id") String id);
 
     @FormUrlEncoded
     @POST("pengguna.php")
