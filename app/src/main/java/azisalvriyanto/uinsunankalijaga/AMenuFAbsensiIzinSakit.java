@@ -111,7 +111,7 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
                 progressDialog.dismiss();
             }
         });
-        
+
         //Spinner Jenis
         Spinner s_jenis = view.findViewById(R.id.l_fabsensi_izinsakit_jenis_pilih);
         //String[] jenis_array = { "Pilih salah satu jenis absensi.", "Sakit", "Izin" };
