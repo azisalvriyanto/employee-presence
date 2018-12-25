@@ -19,7 +19,7 @@
     <string name="action_keluar">Keluar</string>
 
     <string-array name="fabsensi_izinsakit_jenis">
-        <item>Pilih salah satu jenis absensi.</item>
+        <item>Pilih jenis absensi.</item>
         <item>Sakit</item>
         <item>Izin</item>
     </string-array>

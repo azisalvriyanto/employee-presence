@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -135,11 +136,21 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
         });
 
         //Spinner Jenis
-        Spinner s_jenis = view.findViewById(R.id.l_fabsensi_izinsakit_jenis_pilih);
-        //String[] jenis_array = { "Pilih salah satu jenis absensi.", "Sakit", "Izin" };
-        /*ArrayAdapter adapter = new ArrayAdapter(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, jenis_array);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        jenis.setAdapter(adapter);*/
+        final String[] jenis = new String[1];
+        final Spinner s_jenis = view.findViewById(R.id.l_fabsensi_izinsakit_jenis_pilih);
+        s_jenis.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 1 || position == 2) {
+                    jenis[0] = s_jenis.getItemAtPosition(position).toString();
+                    Toast.makeText(getActivity().getApplicationContext(), "Jenis presensi \""+jenis[0]+"\" dipilih.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -176,8 +187,6 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
         tv_latitude.setText(latitude);
         tv_longitude.setText(longitude);
 
-        //new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        //Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("*/*");
@@ -197,7 +206,6 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
             }
         });
 
-
         Button b_kirim = view.findViewById(R.id.l_fabsensi_absensi_b_kirim);
         b_kirim.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,7 +221,7 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
                 EditText tv_keterangan = view.findViewById(R.id.l_fabsensi_izinsakit_keterangan_keterangan);
                 String keterangan = tv_keterangan.getText().toString();
 
-                Call<ModelRiwayatTambah> call = apiService.absensi("izin", username, latitude, longitude, multipartBody, requestBody, keterangan);
+                Call<ModelRiwayatTambah> call = apiService.absensi(jenis[0], username, latitude, longitude, multipartBody, requestBody, keterangan);
                 call.enqueue(new Callback<ModelRiwayatTambah>() {
                     @Override
                     public void onResponse(Call<ModelRiwayatTambah> call, Response<ModelRiwayatTambah> response) {
@@ -404,6 +412,4 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
         }
         return null;
     }
-
-
 }

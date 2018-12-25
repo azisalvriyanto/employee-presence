@@ -244,7 +244,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginLeft="16dp"
-                    android:padding="25dp"/>
+                    android:padding="20dp"/>
 
                 <EditText
                     android:id="@+id/l_fabsensi_izinsakit_keterangan_keterangan"
