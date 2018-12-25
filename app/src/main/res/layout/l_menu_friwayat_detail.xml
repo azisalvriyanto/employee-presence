@@ -245,6 +245,18 @@
                     android:layout_marginLeft="16dp" />
 
                 <TextView
+                    android:id="@+id/l_friwayat_detail_berkas_label"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="Berkas"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorSecondaryText"
+                    android:layout_below="@+id/l_friwayat_detail_keterangan"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp" />
+
+                <TextView
                     android:id="@+id/l_friwayat_detail_berkas"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -252,9 +264,8 @@
                     android:textSize="13sp"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimaryText"
-                    android:gravity="center_horizontal"
-                    android:layout_below="@+id/l_friwayat_detail_keterangan"
-                    android:layout_marginTop="20dp"
+                    android:textAlignment="center"
+                    android:layout_below="@+id/l_friwayat_detail_berkas_label"
                     android:layout_marginRight="16dp"
                     android:layout_marginLeft="16dp" />
 

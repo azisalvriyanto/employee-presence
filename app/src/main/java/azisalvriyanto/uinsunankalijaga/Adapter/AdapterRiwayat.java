@@ -104,8 +104,8 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.CustomVi
                 final TextView a_friwayat_detail_tanggal      = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_tanggal);
                 final TextView a_friwayat_detail_latitude     = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_latitude);
                 final TextView a_friwayat_detail_longitude    = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_longitude);
-                final TextView l_friwayat_detail_keterangan   = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_keterangan);
-                final TextView l_friwayat_detail_berkas       = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_berkas);
+                final TextView a_friwayat_detail_keterangan   = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_keterangan);
+                final TextView a_friwayat_detail_berkas       = bottomSheetDialog.findViewById(R.id.l_friwayat_detail_berkas);
 
                 //retrofit
                 final Retrofit apiClient = ApiClient.getClient();
@@ -141,8 +141,8 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.CustomVi
                                     a_friwayat_detail_nip.setText(data.getNIP());
                                     a_friwayat_detail_latitude.setText(data.getLatitude());
                                     a_friwayat_detail_longitude.setText(data.getLongitude());
-                                    l_friwayat_detail_keterangan.setText(capitalize(keterangan));
-                                    l_friwayat_detail_berkas.setText(data.getBerkas());
+                                    a_friwayat_detail_keterangan.setText(capitalize(keterangan));
+                                    a_friwayat_detail_berkas.setText(data.getBerkas());
                                 } else {
                                     Toast.makeText(holder.itemView.getContext(), "Detail riwayat tidak ditemukan.", Toast.LENGTH_SHORT).show();
                                 }
