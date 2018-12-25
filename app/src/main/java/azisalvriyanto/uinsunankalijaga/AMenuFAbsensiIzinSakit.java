@@ -21,6 +21,7 @@ import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,9 +59,10 @@ import static azisalvriyanto.uinsunankalijaga.BuildConfig.DEBUG;
 
 
 public class AMenuFAbsensiIzinSakit extends Fragment {
-    private static final int REQUEST_WRITE_STORAGE = 1;
-    private static final int REQUEST_ACCESS_LOCATION = 1;
-    int REQUEST_CODE_DOC = 1;
+    private static final int MY_PERMISSIONS_REQUEST_CODE = 1337;
+    private static final int LOCATION_PERMISSION_CODE = 300;
+    private static final int WRITE_STORAGE_REQUEST = 400;
+    private static final int WRITE_STORAGE_PERMISSION = 500;
     String latitude, longitude;
     Button file_pilih;
     File file;
@@ -68,8 +70,6 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
     //retrofit
     final Retrofit apiClient = ApiClient.getClient();
     final ApiService apiService = apiClient.create(ApiService.class);
-
-    public static Context contextOfApplication;
 
     public AMenuFAbsensiIzinSakit() {
         // Required empty public constructor
@@ -94,9 +94,9 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
         final TextView tv_nama        = view.findViewById(R.id.l_fabsensi_izinsakit_pengguna_nama);
         final ImageView iv_fotop      = view.findViewById(R.id.l_fabsensi_izinsakit_pengguna_foto);
 
-        Boolean hasPermission = (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
-        if (!hasPermission) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_STORAGE);
+        //permission
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            checkPermission();
         }
 
         Call<ModelPengguna> call = apiService.pengguna(username);
@@ -204,7 +204,12 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
         file_pilih.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(Intent.createChooser(intent,"Pilih berkas..."), REQUEST_CODE_DOC);
+            if (getActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)  != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_CODE);
+            }
+            else {
+                startActivityForResult(Intent.createChooser(intent,"Pilih berkas..."), WRITE_STORAGE_REQUEST);
+            }
             }
         });
 
@@ -261,13 +266,15 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
 
     @Override
     public void onActivityResult(int requestcode, int resultcode, Intent data){
-        if (requestcode == REQUEST_CODE_DOC && resultcode == RESULT_OK){
-            Uri uri     = data.getData();
-            file        = new File(getPath(getActivity(), uri));
-            file_pilih.setText(file.getAbsolutePath());
+        super.onActivityResult(resultcode, resultcode, data);
+        if (RESULT_OK == resultcode) {
+            if (WRITE_STORAGE_REQUEST == requestcode) {
+                Uri uri = data.getData();
+                file = new File(getPath(getActivity(), uri));
+                file_pilih.setText(file.getAbsolutePath());
+            }
         }
 
-        super.onActivityResult(resultcode, resultcode, data);
     }
 
     public static String getPath(final Context context, final Uri uri) {
@@ -415,5 +422,58 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
                 cursor.close();
         }
         return null;
+    }
+
+    protected void checkPermission(){
+        if(
+            ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+            + ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+            + ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        != PackageManager.PERMISSION_GRANTED){
+            // Do something, when permissions not granted
+            if(
+                    ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.CAMERA)
+                            || ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                            || ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+                    ) {
+                // Show an alert dialog here with request explanation
+                ActivityCompat.requestPermissions(
+                    getActivity(),
+                    new String[]{
+                            Manifest.permission.CAMERA,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    },
+                    MY_PERMISSIONS_REQUEST_CODE
+                );
+            }
+        }
+        else {
+            //Do something, when permissions are already granted
+            //Toast.makeText(getActivity(),"Permissions already granted",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
+        switch (requestCode){
+            case MY_PERMISSIONS_REQUEST_CODE: {
+                // When request is cancelled, the results array are empty
+                if(
+                    (grantResults.length > 0) && (
+                        grantResults[0]
+                        + grantResults[1]
+                        + grantResults[2]
+                    == PackageManager.PERMISSION_GRANTED )){
+                    //Permissions are granted
+                    //Toast.makeText(getActivity(),"Permissions granted.",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    //Permissions are denied
+                    //Toast.makeText(getActivity(),"Permissions denied.",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 }

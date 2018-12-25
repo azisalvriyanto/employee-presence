@@ -150,7 +150,7 @@
                     android:id="@+id/l_fabsensi_detail_geolocation_label"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Geolocation"
+                    android:text="Geolokasi"
                     android:textSize="16sp"
                     android:textColor="@color/colorSecondaryText"
                     android:layout_marginRight="16dp"

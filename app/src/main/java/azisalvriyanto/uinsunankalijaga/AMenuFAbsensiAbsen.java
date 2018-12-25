@@ -11,10 +11,13 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,11 +47,13 @@ import retrofit2.Retrofit;
 import static android.app.Activity.RESULT_OK;
 
 public class AMenuFAbsensiAbsen extends Fragment {
+    private static final int MY_PERMISSIONS_REQUEST_CODE = 1337;
+    private static final int CAMERA_REQUEST = 100;
+    private static final int CAMERA_PERMISSION = 200;
+    private static final int LOCATION_PERMISSION_CODE = 300;
     ImageView iv_foto, iv_foto_ambil;
-    private static final int requestcode = 1;
     String latitude, longitude;
     Uri uri;
-
 
     public AMenuFAbsensiAbsen() {
         //Required empty public constructor
@@ -72,6 +77,11 @@ public class AMenuFAbsensiAbsen extends Fragment {
         final TextView tv_nama        = view.findViewById(R.id.l_friwayat_absen_pengguna_nama);
         final ImageView iv_fotop      = view.findViewById(R.id.l_friwayat_absen_pengguna_foto);
 
+        //permission
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            checkPermission();
+        }
+
         //foto
         iv_foto = view.findViewById(R.id.l_friwayat_absen_berkas_foto);
 
@@ -84,27 +94,23 @@ public class AMenuFAbsensiAbsen extends Fragment {
             @Override
             public void onResponse(Call<ModelPengguna> call, Response<ModelPengguna> response) {
                 if (response.isSuccessful()) {
-                    try {
-                        if (response.body().getStatus().equals("sukses")) {
-                            ModelPengguna data = response.body();
+                    if (response.body().getStatus().equals("sukses")) {
+                        ModelPengguna data = response.body();
 
-                            String data_foto = data.getData().getFoto();
-                            String data_foto_url = "http://presensi-pegawai.msftrailers.co.za/foto/"+data_foto;
-                            loadImageFromUrl(data_foto_url, iv_fotop);
+                        String data_foto = data.getData().getFoto();
+                        String data_foto_url = "http://presensi-pegawai.msftrailers.co.za/foto/"+data_foto;
+                        loadImageFromUrl(data_foto_url, iv_fotop);
 
-                            String data_nip = data.getData().getNIP();
-                            String data_nama = data.getData().getNama();
+                        String data_nip = data.getData().getNIP();
+                        String data_nama = data.getData().getNama();
 
-                            tv_nip.setText(data_nip);
-                            tv_nama.setText(data_nama);
-                        } else {
-                            Toast.makeText(getActivity().getApplicationContext(), "Akun tidak ditemukan.", Toast.LENGTH_SHORT).show();
-                        }
-
-                        progressDialog.dismiss();
-                    } catch (Exception e) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Sambugan internet gagal.", Toast.LENGTH_SHORT).show();
+                        tv_nip.setText(data_nip);
+                        tv_nama.setText(data_nama);
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), "Akun tidak ditemukan.", Toast.LENGTH_SHORT).show();
                     }
+
+                    progressDialog.dismiss();
                 } else {
                     Toast.makeText(getActivity().getApplicationContext(), "Kredensial tidak valid.", Toast.LENGTH_SHORT).show();
                 }
@@ -129,10 +135,16 @@ public class AMenuFAbsensiAbsen extends Fragment {
 
         iv_foto_ambil = view.findViewById(R.id.l_friwayat_absen_berkas_foto_ambil);
         iv_foto_ambil.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                Intent photoCapturedIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(photoCapturedIntent, requestcode);
+                if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION);
+                }
+                else {
+                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                }
             }
         });
 
@@ -220,10 +232,12 @@ public class AMenuFAbsensiAbsen extends Fragment {
 
     public void onActivityResult(int requestcode, int resultcode, Intent data){
         super.onActivityResult(requestcode, resultcode, data);
-        if (this.requestcode == requestcode && resultcode == RESULT_OK){
-            Bitmap bitmap =(Bitmap) data.getExtras().get("data");
-            uri = getImageUri(getContext().getApplicationContext(), bitmap);
-            iv_foto.setImageBitmap(bitmap);
+        if (RESULT_OK == resultcode) {
+            if (CAMERA_REQUEST == requestcode){
+                Bitmap bitmap =(Bitmap) data.getExtras().get("data");
+                uri = getImageUri(getContext().getApplicationContext(), bitmap);
+                iv_foto.setImageBitmap(bitmap);
+            }
         }
     }
 
@@ -249,6 +263,52 @@ public class AMenuFAbsensiAbsen extends Fragment {
         }
     }
 
+    protected void checkPermission(){
+        if(
+            ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+            + ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        != PackageManager.PERMISSION_GRANTED){
+            // Do something, when permissions not granted
+            if(
+                ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                || ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
+            ) {
+                // Show an alert dialog here with request explanation
+                ActivityCompat.requestPermissions(
+                    getActivity(),
+                    new String[]{
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    },
+                    MY_PERMISSIONS_REQUEST_CODE
+                );
+            }
+        }
+        else {
+            //Do something, when permissions are already granted
+            //Toast.makeText(getActivity(),"Permissions already granted",Toast.LENGTH_SHORT).show();
+        }
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
+        switch (requestCode){
+            case MY_PERMISSIONS_REQUEST_CODE: {
+                // When request is cancelled, the results array are empty
+                if(
+                    (grantResults.length > 0) && (
+                        grantResults[0]
+                        + grantResults[1]
+                    == PackageManager.PERMISSION_GRANTED )){
+                    //Permissions are granted
+                    //Toast.makeText(getActivity(),"Permissions granted.",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    //Permissions are denied
+                    //Toast.makeText(getActivity(),"Permissions denied.",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
 }
