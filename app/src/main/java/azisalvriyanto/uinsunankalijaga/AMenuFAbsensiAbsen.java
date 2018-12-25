@@ -5,10 +5,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -24,14 +26,16 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 
 import azisalvriyanto.uinsunankalijaga.Api.ApiClient;
 import azisalvriyanto.uinsunankalijaga.Api.ApiService;
 import azisalvriyanto.uinsunankalijaga.Model.ModelPengguna;
+import azisalvriyanto.uinsunankalijaga.Model.ModelRiwayatTambah;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,7 +46,9 @@ import static android.app.Activity.RESULT_OK;
 public class AMenuFAbsensiAbsen extends Fragment {
     ImageView iv_foto, iv_foto_ambil;
     private static final int requestcode = 1;
-    double latitude, longitude;
+    String latitude, longitude;
+    Uri uri;
+
 
     public AMenuFAbsensiAbsen() {
         //Required empty public constructor
@@ -50,7 +56,7 @@ public class AMenuFAbsensiAbsen extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.l_menu_fabsensi_absen, container, false);
+        final View view = inflater.inflate(R.layout.l_menu_fabsensi_absen, container, false);
         final String username = SaveSharedPreference.getNIP(getActivity().getApplicationContext());
 
         //Dialog
@@ -131,13 +137,13 @@ public class AMenuFAbsensiAbsen extends Fragment {
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            latitude    = location.getLatitude();
-            longitude   = location.getLongitude();
+            latitude    = location.getLatitude()+"";
+            longitude   = location.getLongitude()+"";
 
             final LocationListener locationListener = new LocationListener() {
                 public void onLocationChanged(Location location) {
-                    latitude    = location.getLatitude();
-                    longitude   = location.getLongitude();
+                    latitude    = location.getLatitude()+"";
+                    longitude   = location.getLongitude()+"";
                 }
 
                 @Override
@@ -158,9 +164,8 @@ public class AMenuFAbsensiAbsen extends Fragment {
 
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
         }
-
-        tv_latitude.setText(latitude+"");
-        tv_longitude.setText(longitude+"");
+        tv_latitude.setText(latitude);
+        tv_longitude.setText(longitude);
 
         Button b_kirim = view.findViewById(R.id.l_friwayat_absen_b_kirim);
         b_kirim.setOnClickListener(new View.OnClickListener() {
@@ -171,18 +176,38 @@ public class AMenuFAbsensiAbsen extends Fragment {
                 progressDialog.setCancelable(false);
                 progressDialog.show();
 
-                final Timer t = new Timer();
-                t.schedule(new TimerTask() {
-                    public void run() {
+                File file = new File(getRealPathFromUri(getContext().getApplicationContext(), uri));
+                RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+                MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("berkas", file.getName(), requestBody);
+
+                Call<ModelRiwayatTambah> call = apiService.absensi("absen", username, latitude, longitude, multipartBody, requestBody, "");
+                call.enqueue(new Callback<ModelRiwayatTambah>() {
+                    @Override
+                    public void onResponse(Call<ModelRiwayatTambah> call, Response<ModelRiwayatTambah> response) {
+                        if (response.isSuccessful()) {
+                            try {
+                                if (response.body().getStatus().equals("sukses")) {
+                                    Toast.makeText(getActivity().getApplicationContext(), "Anda telah absen hari ini.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getActivity().getApplicationContext(), response.body().getPesan(), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                Toast.makeText(getActivity().getApplicationContext(), "Response gagal.", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(getActivity().getApplicationContext(), "Credentials are not valid.", Toast.LENGTH_SHORT).show();
+                        }
+
                         progressDialog.dismiss();
                     }
-                }, 2000);
 
-                Calendar kalender                   = Calendar.getInstance();
-                SimpleDateFormat tanggal_format     = new SimpleDateFormat("dd/MM/yyy");
-                SimpleDateFormat waktu_format       = new SimpleDateFormat("HH:MM:ss");
-                final String tanggal                = tanggal_format.format(kalender.getTime());
-                final String waktu                  = waktu_format.format(kalender.getTime());
+                    @Override
+                    public void onFailure(Call<ModelRiwayatTambah> call, Throwable t) {
+                        Log.e("TAG", "=======onFailure: " + t.toString());
+                        t.printStackTrace();
+                        progressDialog.dismiss();
+                    }
+                });
             }
         });
 
@@ -192,8 +217,34 @@ public class AMenuFAbsensiAbsen extends Fragment {
     public void onActivityResult(int requestcode, int resultcode, Intent data){
         super.onActivityResult(requestcode, resultcode, data);
         if (this.requestcode == requestcode && resultcode == RESULT_OK){
-            Bitmap bitmap =(Bitmap)data.getExtras().get("data");
+            Bitmap bitmap =(Bitmap) data.getExtras().get("data");
+            uri = getImageUri(getContext().getApplicationContext(), bitmap);
             iv_foto.setImageBitmap(bitmap);
         }
     }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public static String getRealPathFromUri(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = { MediaStore.Images.Media.DATA };
+            cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
+
+
+
 }
