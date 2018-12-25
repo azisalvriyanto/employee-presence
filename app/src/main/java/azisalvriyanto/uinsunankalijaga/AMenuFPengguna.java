@@ -98,17 +98,24 @@ public class AMenuFPengguna extends Fragment {
                             data_fakultas_tv.setText(data_fakultas);
                             data_golongan_tv.setText(data_golongan);
                             data_email_tv.setText(data_email.toLowerCase());
-                        } else {
-                            Toast.makeText(getActivity().getApplicationContext(), "Akun tidak ditemukan.", Toast.LENGTH_SHORT).show();
                         }
+                        else {
+                            Toast.makeText(getActivity().getApplicationContext(), "Akun tidak ditemukan.", Toast.LENGTH_SHORT).show();
+
+                            //keluar
+                            SaveSharedPreference.setLoggedIn(getActivity().getApplicationContext(), false, "data_nip");
+                            Intent intent = new Intent(getActivity().getApplicationContext(), AMasuk.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }
+
+                        progressDialog.dismiss();
                     } catch (Exception e) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Response gagal.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "Sambugan internet gagal.", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Credentials are not valid.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Kredensial tidak valid.", Toast.LENGTH_SHORT).show();
                 }
-
-                progressDialog.dismiss();
             }
 
             private void loadImageFromUrl(String imageUrl, ImageView image){
@@ -120,9 +127,11 @@ public class AMenuFPengguna extends Fragment {
 
             @Override
             public void onFailure(Call<ModelPengguna> call, Throwable t) {
+                Toast.makeText(getActivity().getApplicationContext(), "Sambugan internet gagal.", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+
                 Log.e("TAG", "=======onFailure: " + t.toString());
                 t.printStackTrace();
-                progressDialog.dismiss();
             }
         });
 

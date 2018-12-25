@@ -1,6 +1,7 @@
 package azisalvriyanto.uinsunankalijaga.Adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +33,7 @@ import static org.apache.commons.lang3.StringUtils.capitalize;
 
 public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.CustomViewHolder> {
     private List<ModelRiwayatData> data;
+    Context mContext;
 
     //DARI SINI
     private static final String TAG = "RecyclerViewAdapter";
@@ -87,7 +89,7 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.CustomVi
 
         holder.a_friwayat_detail.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 View contentView = View.inflate(view.getContext(), R.layout.l_menu_friwayat_detail, null);
 
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(view.getContext());
@@ -125,7 +127,7 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.CustomVi
 
 
                                     if (data.getKeterangan() != null && data.getKeterangan().isEmpty()) {
-                                        keterangan = "Keterangan tidak ada.";
+                                        keterangan = "Tidak ada keterangan.";
                                     }
                                     else {
                                         keterangan = data.getKeterangan();
@@ -145,15 +147,17 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.CustomVi
                                     Toast.makeText(holder.itemView.getContext(), "Detail riwayat tidak ditemukan.", Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception e) {
-                                Toast.makeText(holder.itemView.getContext(), "Response gagal.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(holder.itemView.getContext(), "Sambugan internet gagal.", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(holder.itemView.getContext(), "Credentials are not valid.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(holder.itemView.getContext(), "Kredensial tidak valid.", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ModelRiwayatDetail> call, Throwable t) {
+                        Toast.makeText(holder.itemView.getContext(), "Sambugan internet gagal.", Toast.LENGTH_SHORT).show();
+
                         Log.e("TAG", "=======onFailure: " + t.toString());
                         t.printStackTrace();
                     }
@@ -170,7 +174,7 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.CustomVi
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
-        public TextView a_friwayat_jenis, a_friwayat_status, a_friwayat_waktu, a_friwayat_tanggal, a_friwayat_detail_nama;
+        public TextView a_friwayat_jenis, a_friwayat_status, a_friwayat_waktu, a_friwayat_tanggal;
         public RelativeLayout a_friwayat_detail;
         public ImageView a_friwayat_status_gambar;
 
@@ -181,7 +185,6 @@ public class AdapterRiwayat extends RecyclerView.Adapter<AdapterRiwayat.CustomVi
             a_friwayat_waktu            = view.findViewById(R.id.l_friwayat_waktu);
             a_friwayat_tanggal          = view.findViewById(R.id.l_friwayat_tanggal);
             a_friwayat_detail           = view.findViewById(R.id.l_menu_friwayat_list);
-            a_friwayat_detail_nama      = view.findViewById(R.id.l_friwayat_detail_nama);
             a_friwayat_status_gambar    = view.findViewById(R.id.l_friwayat_status_img);
         }
     }

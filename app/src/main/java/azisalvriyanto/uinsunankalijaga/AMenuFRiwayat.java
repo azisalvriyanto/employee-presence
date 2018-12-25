@@ -1,6 +1,7 @@
 package azisalvriyanto.uinsunankalijaga;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -23,6 +24,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
 
 public class AMenuFRiwayat extends Fragment {
     public AMenuFRiwayat() {
@@ -55,26 +58,43 @@ public class AMenuFRiwayat extends Fragment {
             @Override
             public void onResponse(Call<ModelRiwayat> call, Response<ModelRiwayat> response) {
                 if (response.isSuccessful()) {
-                    progressDialog.dismiss();
+                    try {
+                        if (response.body().getStatus().equals("sukses")) {
+                            data = response.body().getData();
+                            recyclerView = view.findViewById(R.id.friwayat_layout);
+                            adapterRiwayat = new AdapterRiwayat(data);
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+                            recyclerView.setLayoutManager(eLayoutManager);
+                            recyclerView.setItemAnimator(new DefaultItemAnimator());
+                            recyclerView.setAdapter(adapterRiwayat);
+                        }
+                        else {
+                            Toast.makeText(getActivity().getApplicationContext(), "Akun tidak ditemukan.", Toast.LENGTH_SHORT).show();
 
-                    data = response.body().getData();
-                    recyclerView = view.findViewById(R.id.friwayat_layout);
-                    adapterRiwayat = new AdapterRiwayat(data);
-                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-                    recyclerView.setLayoutManager(eLayoutManager);
-                    recyclerView.setItemAnimator(new DefaultItemAnimator());
-                    recyclerView.setAdapter(adapterRiwayat);
+                            //keluar
+                            SaveSharedPreference.setLoggedIn(getActivity().getApplicationContext(), false, "data_nip");
+                            Intent intent = new Intent(getActivity().getApplicationContext(), AMasuk.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }
+
+                        progressDialog.dismiss();
+                    } catch (Exception e) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Sambugan internet gagal.", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Credentials are not valid.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Kredensial tidak valid.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ModelRiwayat> call, Throwable t) {
+                Toast.makeText(getActivity().getApplicationContext(), "Sambugan internet gagal.", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+
                 Log.e("TAG", "=======onFailure: " + t.toString());
                 t.printStackTrace();
-                progressDialog.dismiss();
             }
         });
 

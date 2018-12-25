@@ -120,18 +120,20 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
 
                         progressDialog.dismiss();
                     } catch (Exception e) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Response gagal.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "Sambugan internet gagal.", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Credentials are not valid.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Kredensial tidak valid.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ModelPengguna> call, Throwable t) {
+                Toast.makeText(getActivity().getApplicationContext(), "Sambugan internet gagal.", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+
                 Log.e("TAG", "=======onFailure: " + t.toString());
                 t.printStackTrace();
-                progressDialog.dismiss();
             }
         });
 
@@ -148,7 +150,7 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                //tidak ada tindakan
             }
         });
 
@@ -232,21 +234,23 @@ public class AMenuFAbsensiIzinSakit extends Fragment {
                                 } else {
                                     Toast.makeText(getActivity().getApplicationContext(), response.body().getPesan(), Toast.LENGTH_SHORT).show();
                                 }
+
+                                progressDialog.dismiss();
                             } catch (Exception e) {
-                                Toast.makeText(getActivity().getApplicationContext(), "Response gagal.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity().getApplicationContext(), "Sambugan internet gagal.", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(getActivity().getApplicationContext(), "Credentials are not valid.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), "Kredensial tidak valid.", Toast.LENGTH_SHORT).show();
                         }
-
-                        progressDialog.dismiss();
                     }
 
                     @Override
                     public void onFailure(Call<ModelRiwayatTambah> call, Throwable t) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Sambugan internet gagal.", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+
                         Log.e("TAG", "=======onFailure: " + t.toString());
                         t.printStackTrace();
-                        progressDialog.dismiss();
                     }
                 });
             }
