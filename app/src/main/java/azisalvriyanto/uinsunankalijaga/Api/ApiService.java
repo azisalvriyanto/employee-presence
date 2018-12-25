@@ -28,8 +28,6 @@ public interface ApiService {
     Call<ModelRiwayatTambah> absensi(
             @Query("jenis") String jenis,
             @Query("nip") String username,
-            @Query("tanggal") String tanggal,
-            @Query("waktu") String waktu,
             @Query("latitude") String latitude,
             @Query("longitude") String longitude,
             @Part MultipartBody.Part berkasFile,
