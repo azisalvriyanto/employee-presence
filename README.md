@@ -1,6 +1,6 @@
 # PRESENSI PEGAWAI (UIN SUNAN KALIJAGA)
 
-<p align="center">Terima kasih Allah SWT, GOJEK yang telah menjadi inspirasi saya membuat aplikasi ini, http://stackoverflow.com dan youtuber India yang telah membantu saya memahami konsep android studio, Ghifary sebagai team kerja, Husni dan Juang sebagai penyedia Hostpot, amrul, fadqur, khamdan, HMKK dan @wifi.id</p>
+<p align="center">Terima kasih Allah SWT, GOJEK yang telah menjadi inspirasi saya membuat aplikasi ini, http://stackoverflow.com dan youtuber India yang telah membantu saya memahami konsep android studio, Ghifary sebagai team kerja, Husni dan Juang sebagai penyedia Hostpot, amrul, fadqur, khamdan, HMKK dan @wifi.id yang telah membantu menyelesaikan proyek ini.</p>
 
 ## Sumber
 - [Kode](https://drive.google.com/open?id=1lQ1VRtfuPlhU3DviQFE0nbqjnDu45IS5)
