@@ -1,8 +1,9 @@
 # PRESENSI PEGAWAI (UIN SUNAN KALIJAGA)
 
-<p align="center">Greetz: GOJEK yang telah menjadi inspirasi saya membuat aplikasi ini, dan tak luput juga saya ucapkan terima kasih kepada http://stackoverflow.com dan youtuber India</p>
+<p align="center">Terima kasih Allah SWT, GOJEK yang telah menjadi inspirasi saya membuat aplikasi ini, http://stackoverflow.com dan youtuber India yang telah membantu saya memahami konsep android studio, Ghifary sebagai team kerja, Husni dan Juang sebagai penyedia Hostpot, amrul, fadqur, khamdan, HMKK dan @wifi.id</p>
 
-- [Source code](https://drive.google.com/open?id=1lQ1VRtfuPlhU3DviQFE0nbqjnDu45IS5)
+## Sumber
+- [Kode](https://drive.google.com/open?id=1lQ1VRtfuPlhU3DviQFE0nbqjnDu45IS5)
 - [Web (API dan database)](https://drive.google.com/open?id=1X-uX3VV0L_sfgAHvnfAGrCeAJGPwpy68)
 
 ## Screenshot
