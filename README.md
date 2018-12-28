@@ -3,10 +3,8 @@
 - [Source code](https://drive.google.com/open?id=1lQ1VRtfuPlhU3DviQFE0nbqjnDu45IS5)
 - [Web (API dan database)](https://drive.google.com/open?id=1X-uX3VV0L_sfgAHvnfAGrCeAJGPwpy68)
 
-
 ## Screenshot
 Coming soon!
-
 
 ## Kekurangan
 - Pemilihan warna yang kurang tepat.
