@@ -14,3 +14,4 @@ Coming soon!
 - Dibagian riwayat, belum ada validasi (opsi "if else") jika riwayat tidak ada.
 - Tombol "kembali (back)" mungkin diperlukan jika suatu saat menambahkan intent lagi.
 - Tampilan tanggal masih mengikuti seperti di database, mungkin bisa diperbaiki lagi agar lebih bagus. Bisa berupa "Senin, 31 Desember 2018", "Sen, 31 Des" atau "Sen, 31 Des 2018", dll.
+- Dan masih banyak lagi kekurangan lain yang belum saya jamah/telusuri.
