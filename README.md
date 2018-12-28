@@ -9,8 +9,8 @@ Coming soon!
 ## Kekurangan
 - Pemilihan warna yang kurang tepat.
 - Belum ada validasi ketika user tidak ada di database.
-- Belum ada validasi dimenu absensi.
-- Kurang enak dipandang dibagian menu "Absensi", mungkin seharusnya dibuat "radio button" untuk memilih jenis absensi.
+- Belum ada validasi pada menu absensi jika peninputan salah.
+- Kurang enak dipandang dibagian menu "Absensi", mungkin seharusnya dibuat "radio button" untuk memilih jenis absensi. Dengan kata lain, biar satu halaman saja di bagian menu "Absensi", jangan mencabang.
 - Dibagian riwayat, belum ada validasi (opsi "if else") jika riwayat tidak ada.
 - Tombol "kembali (back)" mungkin diperlukan jika suatu saat menambahkan intent lagi.
 - Tampilan tanggal masih mengikuti seperti di database, mungkin bisa diperbaiki lagi agar lebih bagus. Bisa berupa "Senin, 31 Desember 2018", "Sen, 31 Des" atau "Sen, 31 Des 2018", dll.
