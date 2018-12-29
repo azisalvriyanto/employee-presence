@@ -11,6 +11,14 @@
 <p align="center">
 <a href="https://drive.google.com/file/d/1eYvTSZXakbSUi7eIQOvPB3vSAIc2K5yY/view"><img src="https://drive.google.com/uc?id=1eYvTSZXakbSUi7eIQOvPB3vSAIc2K5yY" height="400px"></a>
 <a href="https://drive.google.com/file/d/1UE_sj90KDWJiyt0qiMfvk2HwtCBYrMbM/view"><img src="https://drive.google.com/uc?id=1UE_sj90KDWJiyt0qiMfvk2HwtCBYrMbM" height="400px"></a>
+<a href="https://drive.google.com/file/d/1kf15ZTjVBhFrZINLHaKp5W1pIFzTX1WL/view"><img src="https://drive.google.com/uc?id=1kf15ZTjVBhFrZINLHaKp5W1pIFzTX1WL" height="400px"></a>
+<a href="https://drive.google.com/file/d/1RC-cpr91s6C8XWgGVkHG1gUvSu0GXgoL/view"><img src="https://drive.google.com/uc?id=1RC-cpr91s6C8XWgGVkHG1gUvSu0GXgoL" height="400px"></a>
+<a href="https://drive.google.com/file/d/1q393FBOyKH1rd4NgyVnbUYxyDgLBMsah/view"><img src="https://drive.google.com/uc?id=1q393FBOyKH1rd4NgyVnbUYxyDgLBMsah" height="400px"></a>
+<a href="https://drive.google.com/file/d/1K7Dt_hJ1QEZYBK_oA-9uDURdLt0gtCkE/view"><img src="https://drive.google.com/uc?id=1K7Dt_hJ1QEZYBK_oA-9uDURdLt0gtCkE" height="400px"></a>
+<a href="https://drive.google.com/file/d/1-84OVQ0FvzTsf-tC2z-ARmCEFxic8bEb/view"><img src="https://drive.google.com/uc?id=1-84OVQ0FvzTsf-tC2z-ARmCEFxic8bEb" height="400px"></a>
+<a href="https://drive.google.com/file/d/1a8SnuZnubF6tvkqfCIjR0VxceRlaQpXo/view"><img src="https://drive.google.com/uc?id=1a8SnuZnubF6tvkqfCIjR0VxceRlaQpXo" height="400px"></a>
+<a href="https://drive.google.com/file/d/17xxlh2iEQCErGZEmBQlTINvzUAydvhiz/view"><img src="https://drive.google.com/uc?id=17xxlh2iEQCErGZEmBQlTINvzUAydvhiz" height="400px"></a>
+<a href="https://drive.google.com/file/d/1wANetjdIK5haBVD3aDB6RIZvOF4DvyXg/view"><img src="https://drive.google.com/uc?id=1wANetjdIK5haBVD3aDB6RIZvOF4DvyXg" height="400px"></a>
 </p>
 
 ## Kekurangan
