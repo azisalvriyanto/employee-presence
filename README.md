@@ -6,11 +6,11 @@
 - [Kode](https://drive.google.com/open?id=1lQ1VRtfuPlhU3DviQFE0nbqjnDu45IS5)
 - [Web (API dan database)](https://drive.google.com/open?id=1X-uX3VV0L_sfgAHvnfAGrCeAJGPwpy68)
 - [Gambar](https://drive.google.com/open?id=1Ksbrp5L19dH_raqY6XLP9XTNPSu6ablv)
-https://doc-0s-b8-docs.googleusercontent.com/docs/securesc/4jqlhb50hgpc0s1qq1b1ail5i1i7821r/50fgnquadv4sprsle2oe298kbsuiron4/1546041600000/05515498141032458590/05515498141032458590/1eYvTSZXakbSUi7eIQOvPB3vSAIc2K5yY
 
 ## Gambar
 <p align="center">
-<a href="https://drive.google.com/file/d/1eYvTSZXakbSUi7eIQOvPB3vSAIc2K5yY/view"><img src="https://drive.google.com/uc?id=1eYvTSZXakbSUi7eIQOvPB3vSAIc2K5yY" alt="Splash Screen"></a>
+<a href="https://drive.google.com/file/d/1eYvTSZXakbSUi7eIQOvPB3vSAIc2K5yY/view"><img src="https://drive.google.com/uc?id=1eYvTSZXakbSUi7eIQOvPB3vSAIc2K5yY" height="400px"></a>
+<a href="https://drive.google.com/file/d/1UE_sj90KDWJiyt0qiMfvk2HwtCBYrMbM/view"><img src="https://drive.google.com/uc?id=1UE_sj90KDWJiyt0qiMfvk2HwtCBYrMbM" height="400px"></a>
 </p>
 
 ## Kekurangan
