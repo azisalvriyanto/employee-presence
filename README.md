@@ -10,10 +10,10 @@
 ## Pengujian
 - [Aplikasi (comming soon)](https://www.google.com)
 - [Web (API)](http://presensi-pegawai.msftrailers.co.za/api/)
-- Nomer Induk Pegawai:Kata Sandi
-    - 197701032005011003:0123456789
-    - 198012232009011007:0123456789
-    - 198205112006042002:0123456789
+- Nomer Induk Pegawai | Kata Sandi
+    - 197701032005011003 | 0123456789
+    - 198012232009011007 | 0123456789
+    - 198205112006042002 | 0123456789
 
 ## Kekurangan
 - Pemilihan warna yang kurang tepat.
