@@ -5,9 +5,12 @@
 ## Sumber
 - [Kode](https://drive.google.com/open?id=1lQ1VRtfuPlhU3DviQFE0nbqjnDu45IS5)
 - [Web (API dan database)](https://drive.google.com/open?id=1X-uX3VV0L_sfgAHvnfAGrCeAJGPwpy68)
+- [Gambar](https://drive.google.com/open?id=1Ksbrp5L19dH_raqY6XLP9XTNPSu6ablv)
 
-## Screenshot
-Coming soon!
+## Gambar
+<p align="center">
+<a href="https://drive.google.com/file/d/1eYvTSZXakbSUi7eIQOvPB3vSAIc2K5yY/view"><img src="https://drive.google.com/uc?id=" alt="Splash Screen"></a>
+</p>
 
 ## Kekurangan
 - Pemilihan warna yang kurang tepat.
